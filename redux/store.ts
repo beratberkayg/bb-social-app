@@ -1,7 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
+import modalSlice from "./modalSlice";
 
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    modal: modalSlice,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
