@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 interface ModalState {
-  modal: boolean;
+  loginModal: boolean;
+  postModal: boolean;
 }
 
 const initialState: ModalState = {
-  modal: false,
+  loginModal: false,
+  postModal: false,
 };
 
 export const modalSlice = createSlice({
@@ -13,12 +15,15 @@ export const modalSlice = createSlice({
 
   initialState,
   reducers: {
-    modalFunch: (state) => {
-      state.modal = !state.modal;
+    loginFunc: (state) => {
+      state.loginModal = !state.loginModal;
+    },
+    postFunc: (state) => {
+      state.postModal = !state.postModal;
     },
   },
 });
 
-export const { modalFunch } = modalSlice.actions;
+export const { loginFunc, postFunc } = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} bg-gray-300 mx-6 md:max-w-2xl md:mx-auto`}
+        className={`${roboto.className} mx-6 md:max-w-2xl md:mx-auto bg-gray-200`}
       >
         <ReduxProvider>
           <Navbar />

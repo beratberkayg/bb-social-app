@@ -3,9 +3,9 @@
 import { FcGoogle } from "react-icons/fc";
 import { AiOutlineClose } from "react-icons/ai";
 import { useAppDispatch } from "@/redux/hooks";
-import { modalFunch } from "@/redux/modalSlice";
 import { auth } from "@/utils/firebase";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { loginFunc } from "@/redux/modalSlice";
 import { useRouter } from "next/navigation";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useEffect } from "react";
@@ -14,7 +14,6 @@ const LoginModal = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const googleProvider = new GoogleAuthProvider();
-
   const [user, loading] = useAuthState(auth);
 
   const GoogleLogin = async () => {
@@ -27,8 +26,8 @@ const LoginModal = () => {
     } catch (error) {
       console.log(error);
     }
+    dispatch(loginFunc());
   };
-
   useEffect(() => {
     if (user) {
       router.push("/");
@@ -47,7 +46,7 @@ const LoginModal = () => {
         <div className=" w-full flex items-center justify-between">
           <h2 className="text-2xl font-medium">Giriş Yap</h2>
           <AiOutlineClose
-            onClick={() => dispatch(modalFunch())}
+            onClick={() => dispatch(loginFunc())}
             size={25}
             cursor={"pointer"}
             color={"red"}
@@ -56,7 +55,7 @@ const LoginModal = () => {
 
         <div
           onClick={GoogleLogin}
-          className="flex items-center gap-3 border py-1 px-3 text-lg md:text-xl rounded-lg bg-black text-white cursor-pointer active:scale-50"
+          className="flex items-center gap-3 border py-3 px-3 text-base md:text-xl rounded-lg bg-black text-white cursor-pointer active:scale-50"
         >
           <FcGoogle />
           Google ile Giriş Yap
