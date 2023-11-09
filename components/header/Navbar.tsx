@@ -3,12 +3,25 @@
 import { useAppDispatch } from "@/redux/hooks";
 import { modalFunch } from "@/redux/modalSlice";
 import Link from "next/link";
+import { auth } from "@/utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
+
+  const [user, loading] = useAuthState(auth);
+
+  if (loading) {
+    return (
+      <nav className="flex justify-center items-center pt-10 pb-7 border-b border-black">
+        <h2 className="text-2xl">Kullanıcı Bekleniyor...</h2>
+      </nav>
+    );
+  }
+
   return (
-    <nav className="flex justify-between items-center py-10">
-      <Link href="/" className="text-2xl active:-scale-100">
+    <nav className="flex justify-between items-center pt-10 pb-7 border-b border-black">
+      <Link href="/" className="text-2xl active:scale-50 ">
         <span className="text-3xl font-bold">BB</span> Sosyal App
       </Link>
       <div
