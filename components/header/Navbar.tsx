@@ -45,7 +45,7 @@ const Navbar = () => {
           </button>
 
           <Link href={"/user"} className="w-[50px] h-[50px] relative">
-            {user.photoURL ? (
+            {user?.photoURL ? (
               <Image
                 alt=""
                 src={user.photoURL}

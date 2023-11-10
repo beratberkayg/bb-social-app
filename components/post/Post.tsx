@@ -1,23 +1,27 @@
+"use client";
+import { Post } from "@/app/page";
 import Image from "next/image";
+
 import React from "react";
 
-const Post = () => {
+interface PostProps {
+  post: Post;
+}
+
+const Post: React.FC<PostProps> = ({ post }) => {
   return (
-    <div className="bg-slate-500 p-8 border-b-2 rounded-lg text-white w-full">
-      <div className="flex items-center gap-2">
-        <div className="w-[50px] h-[50px] relative">
-          <Image
-            alt=""
-            src={""}
-            height={50}
-            width={50}
-            style={{ borderRadius: "100%" }}
-          />
-        </div>
-        <h2>Kullanıcı Ad</h2>
+    <div className="bg-slate-500 p-5 border-b-2 rounded-lg text-white w-full flex">
+      <div className="w-[50px] h-[50px] md:w-[100px] md:h-[100px] relative">
+        <Image alt="" src={post.avatar} fill style={{ borderRadius: "100%" }} />
       </div>
-      <div className="py-4">
-        <p>Düşünce</p>
+      <div className="flex flex-col gap-2 mx-3 w-full">
+        <div className="flex items-center ">
+          <h2 className="text-2xl md:text-3xl">{post.kullaniciAd}</h2>
+          <span className="text-sm text-slate-300">@{post.kullaniciAd}</span>
+        </div>
+        <div className="md:mt-2 md:py-4 w-full first-letter:uppercase overscroll-contain md:text-lg">
+          <p>{post.idea}</p>
+        </div>
       </div>
     </div>
   );
