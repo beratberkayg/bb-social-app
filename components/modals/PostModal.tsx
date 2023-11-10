@@ -2,11 +2,12 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { useAppDispatch } from "@/redux/hooks";
 import { postFunc } from "@/redux/modalSlice";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { auth, db } from "@/utils/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
 
 interface PostState {
   idea: string;
@@ -16,6 +17,16 @@ const PostModal = () => {
   const dispatch = useAppDispatch();
   const [post, setPost] = useState<PostState>({ idea: "" });
   const [user, loading] = useAuthState(auth);
+  const router = useRouter();
+
+  const kullaniciKontrol = async () => {
+    if (loading) return;
+    if (!user) router.push("/");
+  };
+
+  useEffect(() => {
+    kullaniciKontrol();
+  }, [kullaniciKontrol]);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -43,7 +54,7 @@ const PostModal = () => {
   };
 
   return (
-    <div className="absolute w-[300px] md:w-[500px] my-5 p-10 shadow-lg rounded-lg  mx-auto bg-slate-400">
+    <div className="absolute w-[300px] md:w-[500px] my-5 p-10 shadow-lg rounded-lg  mx-auto bg-slate-400 z-10">
       <form onSubmit={handleSubmit}>
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold">Yeni Post Ekle</h1>

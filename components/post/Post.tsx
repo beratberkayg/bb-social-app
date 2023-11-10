@@ -2,12 +2,19 @@
 import { PostProps } from "@/app/page";
 import Image from "next/image";
 import React from "react";
+import { auth, db } from "@/utils/firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 type PostProps2 = {
   post: PostProps;
+  children: React.ReactNode;
 };
 
-const Post: React.FC<PostProps2> = ({ post }) => {
+const Post: React.FC<PostProps2> = ({ children, post }) => {
+  const [user, loading] = useAuthState(auth);
+
+  console.log(post);
+
   return (
     <div className="bg-slate-500 p-5 border-b-2 rounded-lg text-white w-full flex">
       <div className="w-[50px] h-[50px] md:w-[100px] md:h-[100px] relative">
@@ -21,6 +28,7 @@ const Post: React.FC<PostProps2> = ({ post }) => {
         <div className="md:mt-2 md:py-4 w-full first-letter:uppercase overscroll-contain md:text-lg">
           <p>{post.idea}</p>
         </div>
+        {children}
       </div>
     </div>
   );
