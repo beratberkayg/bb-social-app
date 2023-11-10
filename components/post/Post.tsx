@@ -1,14 +1,13 @@
 "use client";
-import { Post } from "@/app/page";
+import { PostProps } from "@/app/page";
 import Image from "next/image";
-
 import React from "react";
 
-interface PostProps {
-  post: Post;
-}
+type PostProps2 = {
+  post: PostProps;
+};
 
-const Post: React.FC<PostProps> = ({ post }) => {
+const Post: React.FC<PostProps2> = ({ post }) => {
   return (
     <div className="bg-slate-500 p-5 border-b-2 rounded-lg text-white w-full flex">
       <div className="w-[50px] h-[50px] md:w-[100px] md:h-[100px] relative">

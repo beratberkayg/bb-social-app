@@ -2,7 +2,7 @@
 import { AiOutlineClose } from "react-icons/ai";
 import { useAppDispatch } from "@/redux/hooks";
 import { postFunc } from "@/redux/modalSlice";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import { auth, db } from "@/utils/firebase";
 import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -17,13 +17,13 @@ const PostModal = () => {
   const [post, setPost] = useState<PostState>({ idea: "" });
   const [user, loading] = useAuthState(auth);
 
-  const handleSubmit = async (e: any) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
     if (!post.idea) {
       toast.error("Düşünce Alanı Boş Bırakılamaz", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 1500,
+        autoClose: 1000,
       });
 
       return;

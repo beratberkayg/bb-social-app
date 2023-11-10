@@ -14,25 +14,25 @@ import {
 } from "firebase/firestore";
 import { db } from "@/utils/firebase";
 
-export interface Post {
+export type PostProps = {
   avatar: string;
   idea: string;
   kullaniciAd: string;
   kullaniciId: string;
   tarih: string;
-}
+};
 
 const Home: React.FC = () => {
   const { loginModal } = useAppSelector((state) => state.modal);
   const { postModal } = useAppSelector((state) => state.modal);
-  const [postlar, setPostlar] = useState<Post[]>([]);
+  const [postlar, setPostlar] = useState<PostProps[]>([]);
 
   const postlarıGetir = async () => {
     const collectionRef = collection(db, "postlar");
     const q = query(collectionRef, orderBy("tarih", "desc"));
     const unsub = onSnapshot(q, (snap) => {
       setPostlar(
-        snap.docs.map((doc) => ({ ...(doc.data() as Post), id: doc.id }))
+        snap.docs.map((doc) => ({ ...(doc.data() as PostProps), id: doc.id }))
       );
     });
   };
