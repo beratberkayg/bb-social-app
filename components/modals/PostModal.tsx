@@ -3,6 +3,10 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useAppDispatch } from "@/redux/hooks";
 import { postFunc } from "@/redux/modalSlice";
 import { useState } from "react";
+import { auth, db } from "@/utils/firebase";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { toast } from "react-toastify";
 
 interface PostState {
   idea: string;
@@ -11,9 +15,31 @@ interface PostState {
 const PostModal = () => {
   const dispatch = useAppDispatch();
   const [post, setPost] = useState<PostState>({ idea: "" });
+  const [user, loading] = useAuthState(auth);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
+
+    if (!post.idea) {
+      toast.error("Düşünce Alanı Boş Bırakılamaz", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 1500,
+      });
+
+      return;
+    }
+
+    const collectionRef = collection(db, "postlar");
+
+    await addDoc(collectionRef, {
+      ...post,
+      tarih: serverTimestamp(),
+      kullaniciAd: user?.displayName,
+      avatar: user?.photoURL,
+      kullaniciId: user?.uid,
+    });
+    setPost({ idea: "" });
+    dispatch(postFunc());
   };
 
   return (

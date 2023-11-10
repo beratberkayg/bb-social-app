@@ -22,7 +22,7 @@ const User = () => {
   }, [user, loading]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between ">
+    <div className="flex flex-col items-center justify-between">
       <div>
         <h2>Postlarınız</h2>
         <div>Postlar</div>
