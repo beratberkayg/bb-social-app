@@ -19,7 +19,6 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
   const router = useRouter();
 
   const tarih = post.tarih ? post.tarih.toDate() : null;
-  console.log(tarih);
 
   return (
     <div className="bg-slate-500 p-5 border-b-2 rounded-lg text-white w-full flex">
