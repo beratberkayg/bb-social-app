@@ -15,7 +15,7 @@ import {
   doc,
 } from "firebase/firestore";
 import Post from "@/components/post/Post";
-import { PostProps } from "../page";
+import { PostProps } from "../../page";
 import Image from "next/image";
 import { BsTrash2Fill } from "react-icons/bs";
 import { AiFillEdit } from "react-icons/ai";
@@ -46,7 +46,7 @@ const User = () => {
     getData();
   }, [user, loading]);
 
-  const postSil = async (id) => {
+  const postSil = async (id: string) => {
     const docRef = doc(db, "postlar", id);
     await deleteDoc(docRef);
   };
@@ -78,9 +78,9 @@ const User = () => {
           Çıkış Yap
         </button>
       </div>
-      <div className="mt-10 w-full flex flex-col items-center">
+      <div className="mt-10 w-full flex flex-col items-center gap-3">
         <p className="text-2xl text-bold md:text-3xl mb-5 border-b border-black">
-          Düşüncelerim
+          Düşünceler
         </p>
         {posts.map((post) => (
           <Post key={post.id} post={post}>

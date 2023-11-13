@@ -6,9 +6,12 @@ import Link from "next/link";
 import { auth } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Image from "next/image";
+import { AiFillHome } from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const [user, loading] = useAuthState(auth);
 
@@ -22,13 +25,23 @@ const Navbar = () => {
 
   return (
     <nav className="flex justify-between items-center pt-10 pb-7 border-b border-black">
-      <Link href="/" className="text-2xl  ">
-        <span className="text-3xl font-bold">BB</span> Sosyal App
+      <Link href="/" className=" text-xl md:text-2xl  ">
+        <span className="text-2xl md:text-3xl font-bold text-orange-500">
+          BB
+        </span>{" "}
+        Sosyal App
       </Link>
+      <div
+        onClick={() => router.push("/")}
+        className="cursor-pointer text-orange-500"
+      >
+        <AiFillHome size={35} />
+      </div>
+
       {!user && (
         <div
           onClick={() => dispatch(loginFunc())}
-          className="text-xl font-semibold  bg-orange-500 py-2 px-5 rounded-xl hover:bg-black hover:text-orange-500 hover:transition-all active:scale-50 cursor-pointer shadow-lg shadow-black hover:shadow-orange-500"
+          className="text-xl font-semibold  bg-orange-500 py-1 px-3 md:py-2 md:px-5 rounded-xl hover:bg-black hover:text-orange-500 hover:transition-all active:scale-50 cursor-pointer shadow-lg shadow-black hover:shadow-orange-500"
         >
           Giriş Yap
         </div>
@@ -44,7 +57,10 @@ const Navbar = () => {
             Post
           </button>
 
-          <Link href={"/user"} className="w-[50px] h-[50px] relative">
+          <Link
+            href={`user/${user.uid}`}
+            className="w-[50px] h-[50px] relative"
+          >
             {user?.photoURL ? (
               <Image
                 alt=""

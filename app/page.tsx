@@ -15,11 +15,13 @@ import {
 import { db } from "@/utils/firebase";
 
 export type PostProps = {
+  key: string;
   avatar: string;
   idea: string;
   kullaniciAd: string;
   kullaniciId: string;
-  tarih: string;
+  tarih: Timestamp;
+  id: string;
 };
 
 const Home: React.FC = () => {
@@ -48,7 +50,11 @@ const Home: React.FC = () => {
       <h2 className="text-2xl font-bold md:text-3xl">DÜŞÜNCELER</h2>
       <p>Bu Sayfada Tüm Kullanıcıların Düşünceleri Gösterilir.</p>
       {postlar &&
-        postlar.map((post) => <Post key={post.kullaniciId} post={post} />)}
+        postlar.map((post) => (
+          <Post key={post.kullaniciId} post={post}>
+            {}
+          </Post>
+        ))}
     </main>
   );
 };
