@@ -24,7 +24,7 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
   return (
     <div className="bg-slate-500 p-5 border-b-2 rounded-lg text-white w-full flex">
       <div
-        onClick={() => router.push(`user/${post.kullaniciId}`)}
+        onClick={() => router.push(`user/${user?.uid}`)}
         className="w-[50px] h-[50px] md:w-[100px] md:h-[100px] relative cursor-pointer"
       >
         <Image
