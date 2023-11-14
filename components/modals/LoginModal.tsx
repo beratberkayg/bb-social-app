@@ -54,16 +54,15 @@ const LoginModal = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       dispatch(loginFunc());
-      router.push("/"); // Başarılı giriş sonrasında yönlendirme
+      router.push("/");
     } catch (error) {
       console.log(error);
-      // Hata durumunda gerekli işlemleri burada yapabilirsiniz.
     }
   };
 
   return (
-    <div className="absolute  flex items-center justify-center w-2/3 h-2/3 rounded-3xl z-10">
-      <div className="shadow-black shadow-lg rounded-2xl p-10 flex flex-col gap-7 bg-slate-600 md:w-3/4">
+    <div className="absolute  flex items-center justify-center w-full rounded-3xl z-10">
+      <div className="shadow-black shadow-lg rounded-2xl p-7 flex flex-col gap-7 bg-slate-600 w-4/5 md:w-2/3">
         <div className=" w-full flex items-center justify-between">
           <h2 className="text-2xl font-medium">Giriş Yap</h2>
           <AiOutlineClose
@@ -75,14 +74,14 @@ const LoginModal = () => {
         </div>
         <form
           onSubmit={handleSubmit}
-          className="h-52 w-full flex flex-col gap-5"
+          className=" w-full flex flex-col gap-3 border rounded-lg p-5 shadow-2xl"
         >
           <div className="flex flex-col gap-1">
-            <label className="cursor-pointer" htmlFor="email">
+            <label className="cursor-pointer text-xl font-bold" htmlFor="email">
               Email
             </label>
             <input
-              className="rounded-md px-1 py-1 outline-none"
+              className="rounded-md px-1 py-2 outline-none text-lg"
               type="text"
               name="email"
               id="email"
@@ -92,11 +91,14 @@ const LoginModal = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label className="cursor-pointer" htmlFor="password">
+            <label
+              className="cursor-pointer text-xl font-bold"
+              htmlFor="password"
+            >
               Şifre
             </label>
             <input
-              className="rounded-md px-1 py-1 outline-none"
+              className="rounded-md px-1 py-2 outline-none text-lg"
               type="password"
               name="password"
               id="password"
@@ -110,6 +112,12 @@ const LoginModal = () => {
             type="submit"
             value="Giriş Yap"
           />
+          <Link
+            className="w-full text-center underline py-1 md:text-xl"
+            href={"/forgot"}
+          >
+            Şifremi Unuttum
+          </Link>
         </form>
 
         <div

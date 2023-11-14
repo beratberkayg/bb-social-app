@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import moment from "moment";
 import "moment/locale/tr";
 import { useRouter } from "next/navigation";
+import { FaUser } from "react-icons/fa";
 
 type PostProps2 = {
   post: PostProps;
@@ -29,18 +30,24 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
       }`}
     >
       <div className="relative w-[30px] h-[30px]  ">
-        <Image
-          alt=""
-          src={post?.avatar ? post?.avatar : ""}
-          fill
-          style={{ borderRadius: "100%" }}
-        />
+        {post?.avatar ? (
+          <Image
+            alt=""
+            src={post?.avatar ? post?.avatar : ""}
+            fill
+            style={{ borderRadius: "100%" }}
+          />
+        ) : (
+          <div className="flex justify-center items-center border border-black text-xl rounded-full w-[30px] h-[30px] text-orange-500">
+            <FaUser />
+          </div>
+        )}
       </div>
       <div className=" w-full flex flex-col gap-1">
         <div className="flex items-center  lg:text-xl">
-          <p>{post?.kullaniciAd ? post?.kullaniciAd : "Kullanıcı"}</p>
+          <p>{post?.kullaniciAd}</p>
           <span className="text-[13px] text-slate-400 ">
-            @{post?.kullaniciAd ? post?.kullaniciAd : post?.kullaniciId}
+            @{post?.kullaniciAd}
           </span>
         </div>
         <div

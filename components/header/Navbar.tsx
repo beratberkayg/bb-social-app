@@ -8,6 +8,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Image from "next/image";
 import { AiFillHome } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { FaUser } from "react-icons/fa";
 
 const Navbar = () => {
   const dispatch = useAppDispatch();
@@ -59,7 +60,7 @@ const Navbar = () => {
 
           <Link
             href={`user/${user.uid}`}
-            className="w-[50px] h-[50px] relative"
+            className="w-[50px] h-[50px] relative "
           >
             {user?.photoURL ? (
               <Image
@@ -70,7 +71,9 @@ const Navbar = () => {
                 style={{ borderRadius: "100%" }}
               />
             ) : (
-              <div>U</div>
+              <div className="border border-black w-[50px] h-[50px] rounded-full flex justify-center items-center text-3xl hover:text-orange-500 hover:bg-black hover:transition-all">
+                <FaUser />
+              </div>
             )}
           </Link>
         </div>

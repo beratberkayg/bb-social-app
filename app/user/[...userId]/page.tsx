@@ -18,8 +18,8 @@ import Post from "@/components/post/Post";
 import { PostProps } from "../../page";
 import Image from "next/image";
 import { BsTrash2Fill } from "react-icons/bs";
-import { AiFillEdit } from "react-icons/ai";
-import { postFunc } from "@/redux/modalSlice";
+
+import { FaUser } from "react-icons/fa";
 
 const User = () => {
   const { postModal } = useAppSelector((state) => state.modal);
@@ -64,13 +64,13 @@ const User = () => {
               style={{ borderRadius: "100%" }}
             />
           ) : (
-            <p className="border-black border rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px] text-[10px] text-center flex items-center justify-center md:text-lg">
-              Profil Fotoğrafı Bulunamadı
-            </p>
+            <div className="border-black border rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px] text-center flex items-center justify-center text-3xl md:text-[100px] ">
+              <FaUser />
+            </div>
           )}
         </div>
         <div className="text-center">
-          <p>{user?.displayName}</p>
+          <p className=" first-letter:uppercase">{user?.displayName}</p>
           <p>{user?.email}</p>
         </div>
         <button
