@@ -48,13 +48,17 @@ const Home: React.FC = () => {
       {loginModal && <LoginModal />}
       {postModal && <PostModal />}
       <h2 className="text-2xl font-bold md:text-3xl">DÜŞÜNCELER</h2>
-      <p>Bu Sayfada Tüm Kullanıcıların Düşünceleri Gösterilir.</p>
-      {postlar &&
-        postlar.map((post) => (
-          <Post key={post.kullaniciId} post={post}>
-            {}
-          </Post>
-        ))}
+      <p className="text-center">
+        Bu Sayfada Tüm Kullanıcıların Düşünceleri Gösterilir.
+      </p>
+      <div className="flex items-center justify-center flex-wrap gap-3">
+        {postlar &&
+          postlar.map((post) => (
+            <Post key={post.kullaniciId} post={post}>
+              {}
+            </Post>
+          ))}
+      </div>
     </main>
   );
 };

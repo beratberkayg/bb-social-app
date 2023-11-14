@@ -1,7 +1,7 @@
 "use client";
 import { PostProps } from "@/app/page";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import moment from "moment";
@@ -20,12 +20,15 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
 
   const tarih = post.tarih ? post.tarih.toDate() : null;
 
+  const [showText, setShowText] = useState<boolean>(false);
+
   return (
-    <div className="bg-slate-500 p-5 border-b-2 rounded-lg text-white w-full flex">
-      <div
-        onClick={() => router.push(`user/${user?.uid}`)}
-        className="w-[50px] h-[50px] md:w-[100px] md:h-[100px] relative cursor-pointer"
-      >
+    <div
+      className={`bg-slate-300 rounded-lg w-full md:w-[310px] lg:w-[400px] h-24 md:h-32 lg:h-36 p-2 md:p-3 lg:p-5 flex gap-3 ${
+        showText ? "h-36 md:h-44 lg:h-48" : ""
+      }`}
+    >
+      <div className="relative w-[30px] h-[30px]  ">
         <Image
           alt=""
           src={post?.avatar}
@@ -33,17 +36,24 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
           style={{ borderRadius: "100%" }}
         />
       </div>
-      <div className="flex flex-col gap-2 mx-3 w-full">
-        <div className="flex items-center ">
-          <h2 className="text-2xl md:text-3xl">{post?.kullaniciAd}</h2>
-          <span className="text-sm text-slate-300">@{post?.kullaniciAd}</span>
+      <div className=" w-full flex flex-col gap-1">
+        <div className="flex items-center  lg:text-xl">
+          <p>{post?.kullaniciAd}</p>
+          <span className="text-[13px] text-slate-400 ">
+            @{post?.kullaniciAd}
+          </span>
         </div>
-        <div className="md:mt-2 md:py-4 w-full first-letter:uppercase overscroll-contain md:text-lg">
-          <p>{post?.idea}</p>
+        <div
+          onClick={() => (post?.idea.length > 62 ? setShowText(!showText) : "")}
+          className={` first-letter:uppercase ${
+            post?.idea.length > 80 ? " line-clamp-2 cursor-pointer " : ""
+          } ${showText ? "line-clamp-none" : ""} `}
+        >
+          {post?.idea}
         </div>
-        <p>{moment(tarih).calendar()}</p>
-        {children}
+        <div>{moment(tarih).calendar()}</div>
       </div>
+      {children}
     </div>
   );
 };

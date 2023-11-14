@@ -82,15 +82,17 @@ const User = () => {
         <p className="text-2xl text-bold md:text-3xl mb-5 border-b border-black">
           Düşünceler
         </p>
-        {posts.map((post) => (
-          <Post key={post.id} post={post}>
-            <div className="flex justify-end">
-              <button onClick={() => postSil(post.id)}>
-                <BsTrash2Fill color={"red"} cursor={"pointer"} size={30} />
-              </button>
-            </div>
-          </Post>
-        ))}
+        <div className="flex items-center justify-center flex-wrap gap-3 w-full">
+          {posts.map((post) => (
+            <Post key={post.id} post={post}>
+              <div className="flex justify-end">
+                <button onClick={() => postSil(post.id)}>
+                  <BsTrash2Fill color={"red"} cursor={"pointer"} size={30} />
+                </button>
+              </div>
+            </Post>
+          ))}
+        </div>
       </div>
     </div>
   );

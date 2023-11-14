@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} mx-6 md:max-w-2xl md:mx-auto bg-gray-200 min-h-screen flex flex-col `}
+        className={`${roboto.className} mx-6 md:mx-12 lg:mx-20 bg-gray-200 min-h-screen flex flex-col `}
       >
         <ReduxProvider>
           <ToastContainer limit={1} />
