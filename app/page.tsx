@@ -16,9 +16,9 @@ import { db } from "@/utils/firebase";
 
 export type PostProps = {
   key: string;
-  avatar: string;
+  avatar?: string | null;
   idea: string;
-  kullaniciAd: string;
+  kullaniciAd?: string | null;
   kullaniciId: string;
   tarih: Timestamp;
   id: string;

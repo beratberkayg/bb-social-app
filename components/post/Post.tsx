@@ -31,16 +31,16 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
       <div className="relative w-[30px] h-[30px]  ">
         <Image
           alt=""
-          src={post?.avatar}
+          src={post?.avatar ? post?.avatar : ""}
           fill
           style={{ borderRadius: "100%" }}
         />
       </div>
       <div className=" w-full flex flex-col gap-1">
         <div className="flex items-center  lg:text-xl">
-          <p>{post?.kullaniciAd}</p>
+          <p>{post?.kullaniciAd ? post?.kullaniciAd : user?.email}</p>
           <span className="text-[13px] text-slate-400 ">
-            @{post?.kullaniciAd}
+            @{post?.kullaniciAd ? post?.kullaniciAd : user?.email}
           </span>
         </div>
         <div

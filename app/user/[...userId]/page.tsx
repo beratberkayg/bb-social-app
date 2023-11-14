@@ -64,7 +64,9 @@ const User = () => {
               style={{ borderRadius: "100%" }}
             />
           ) : (
-            <p>Profil Fotoğrafı Bulunamadı</p>
+            <p className="border-black border rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px] text-[10px] text-center flex items-center justify-center md:text-lg">
+              Profil Fotoğrafı Bulunamadı
+            </p>
           )}
         </div>
         <div className="text-center">
