@@ -24,7 +24,7 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
 
   return (
     <div
-      className={`bg-slate-300 rounded-lg w-full md:w-[310px] lg:w-[400px] h-24 md:h-32 lg:h-36 p-2 md:p-3 lg:p-5 flex gap-3 ${
+      className={`bg-slate-300 rounded-lg w-full md:w-[310px] lg:w-[400px] h-26 md:h-32 lg:h-36 p-2 md:p-3 lg:p-5 flex gap-3 ${
         showText ? "h-36 md:h-44 lg:h-48" : ""
       }`}
     >

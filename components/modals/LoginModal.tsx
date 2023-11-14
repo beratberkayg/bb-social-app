@@ -41,7 +41,7 @@ const LoginModal = () => {
   }
 
   return (
-    <div className="absolute  flex items-center justify-center w-2/3 h-2/3 rounded-3xl">
+    <div className="absolute  flex items-center justify-center w-2/3 h-2/3 rounded-3xl z-10">
       <div className="shadow-black shadow-lg rounded-2xl p-10 flex flex-col gap-7 bg-slate-600">
         <div className=" w-full flex items-center justify-between">
           <h2 className="text-2xl font-medium">Giriş Yap</h2>
