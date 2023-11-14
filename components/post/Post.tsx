@@ -38,9 +38,9 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
       </div>
       <div className=" w-full flex flex-col gap-1">
         <div className="flex items-center  lg:text-xl">
-          <p>{post?.kullaniciAd ? post?.kullaniciAd : user?.email}</p>
+          <p>{post?.kullaniciAd ? post?.kullaniciAd : "Kullanıcı"}</p>
           <span className="text-[13px] text-slate-400 ">
-            @{post?.kullaniciAd ? post?.kullaniciAd : user?.email}
+            @{post?.kullaniciAd ? post?.kullaniciAd : post?.kullaniciId}
           </span>
         </div>
         <div
