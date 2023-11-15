@@ -62,7 +62,7 @@ const LoginModal = () => {
 
   return (
     <div className="absolute  flex items-center justify-center w-full rounded-3xl z-10">
-      <div className="shadow-black shadow-lg rounded-2xl p-7 flex flex-col gap-7 bg-slate-600 w-4/5 md:w-2/3">
+      <div className="shadow-black shadow-lg rounded-2xl p-7 flex flex-col gap-7 bg-slate-600 w-4/5 md:w-2/3 lg:w-1/2">
         <div className=" w-full flex items-center justify-between">
           <h2 className="text-2xl font-medium">Giriş Yap</h2>
           <AiOutlineClose
@@ -119,7 +119,6 @@ const LoginModal = () => {
             Şifremi Unuttum
           </Link>
         </form>
-
         <div
           onClick={GoogleLogin}
           className="flex items-center justify-center gap-3 border py-3 px-3 text-base md:text-xl rounded-lg bg-black text-white cursor-pointer active:scale-50"

@@ -51,7 +51,7 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
           </span>
         </div>
         <div
-          onClick={() => (post?.idea.length > 62 ? setShowText(!showText) : "")}
+          onClick={() => (post?.idea.length > 80 ? setShowText(!showText) : "")}
           className={` first-letter:uppercase ${
             post?.idea.length > 80 ? " line-clamp-2 cursor-pointer " : ""
           } ${showText ? "line-clamp-none" : ""} `}

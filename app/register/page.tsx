@@ -33,7 +33,9 @@ const Login = () => {
 
   return (
     <div className="bg-gray-500 w-3/4 md:w-1/2 lg:w-[500px] mx-auto flex flex-col mt-5 md:mt-10 p-3 rounded-lg">
-      <p className="text-center text-xl mt-5">Kayıt Ol</p>
+      <p className="text-center text-xl md:text-2xl lg:text-3xl font-bold mt-5">
+        Kayıt Ol
+      </p>
       <form
         onSubmit={handleSubmit}
         className="w-full flex flex-col gap-5 mt-10"
