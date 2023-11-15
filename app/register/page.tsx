@@ -22,7 +22,7 @@ const Login = () => {
         .then((auth) => {
           updateProfile(auth.user, { displayName: name });
           router.push("/");
-          alert("Login success");
+          alert("Kayıt Başarılı");
         })
         .catch((e) => {
           console.log(e);
@@ -84,6 +84,9 @@ const Login = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <span className="text-center">
+            Şifreniz en az 8 karakterli olmalıdır.
+          </span>
         </div>
         <input
           className="flex items-center justify-center border py-3 px-3 text-base md:text-xl rounded-lg bg-black text-white cursor-pointer hover:scale-75"

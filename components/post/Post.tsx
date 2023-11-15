@@ -25,8 +25,8 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
 
   return (
     <div
-      className={`bg-slate-300 rounded-lg w-full md:w-[310px] lg:w-[400px] h-26 md:h-32 lg:h-36 p-2 md:p-3 lg:p-5 flex gap-3 ${
-        showText ? "h-36 md:h-44 lg:h-48" : ""
+      className={`bg-slate-300 rounded-lg w-full md:w-[310px] lg:w-[350px] h-26 md:h-32 lg:h-36 p-2 md:p-3 lg:p-5 flex gap-3 ${
+        showText ? " h-40 md:h-44 lg:h-48" : ""
       }`}
     >
       <div className="relative w-[30px] h-[30px]  ">
@@ -46,14 +46,14 @@ const Post: React.FC<PostProps2> = ({ children, post }) => {
       <div className=" w-full flex flex-col gap-1">
         <div className="flex items-center  lg:text-xl">
           <p>{post?.kullaniciAd}</p>
-          <span className="text-[13px] text-slate-400 ">
+          <span className="text-slate-400 text-[10px]">
             @{post?.kullaniciAd}
           </span>
         </div>
         <div
-          onClick={() => (post?.idea.length > 80 ? setShowText(!showText) : "")}
+          onClick={() => (post?.idea.length > 70 ? setShowText(!showText) : "")}
           className={` first-letter:uppercase ${
-            post?.idea.length > 80 ? " line-clamp-2 cursor-pointer " : ""
+            post?.idea.length > 70 ? " line-clamp-2 cursor-pointer  " : ""
           } ${showText ? "line-clamp-none" : ""} `}
         >
           {post?.idea}

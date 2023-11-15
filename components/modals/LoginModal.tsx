@@ -18,7 +18,7 @@ const LoginModal = () => {
   const googleProvider = new GoogleAuthProvider();
   const [user, loading] = useAuthState(auth);
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<any>("");
 
   const GoogleLogin = async () => {
     try {
@@ -57,6 +57,7 @@ const LoginModal = () => {
       router.push("/");
     } catch (error) {
       console.log(error);
+      alert("Kullanıcı Adı veya Şifre Yanlış...");
     }
   };
 
@@ -115,6 +116,7 @@ const LoginModal = () => {
           <Link
             className="w-full text-center underline py-1 md:text-xl"
             href={"/forgot"}
+            onClick={() => dispatch(loginFunc())}
           >
             Şifremi Unuttum
           </Link>
