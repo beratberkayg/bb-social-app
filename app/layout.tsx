@@ -6,6 +6,7 @@ import Navbar from "@/components/header/Navbar";
 import Footer from "@/components/footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
+import PreLoader from "@/components/PreLoader/PreLoader";
 
 const roboto = Roboto_Condensed({ subsets: ["latin"] });
 
@@ -22,13 +23,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${roboto.className} mx-6 md:mx-12 lg:mx-20 bg-gray-200 min-h-screen flex flex-col `}
+        className={`${roboto.className}  bg-gray-200 min-h-screen flex flex-col `}
       >
         <ReduxProvider>
           <ToastContainer limit={1} />
+          <PreLoader />
           <Navbar />
           <main className="flex-grow">{children}</main>
-          <Footer />
         </ReduxProvider>
       </body>
     </html>

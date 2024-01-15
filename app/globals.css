@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --pad: max(20px, 4vmin);
+}
+
 * {
   margin: 0;
   padding: 0;

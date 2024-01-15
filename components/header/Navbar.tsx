@@ -33,7 +33,7 @@ const Navbar = () => {
         Sosyal App
       </Link>
       <div
-        onClick={() => router.push("/")}
+        onClick={() => router.push("/home")}
         className="cursor-pointer text-orange-500"
       >
         <AiFillHome size={35} />
