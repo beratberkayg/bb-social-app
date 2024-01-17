@@ -11,7 +11,6 @@ const PreLoader = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setPageLoading(false);
-      router.push("/");
     }, 1000);
     return () => clearTimeout(timer);
   }, [pageLoading]);
