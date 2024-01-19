@@ -50,8 +50,14 @@ const Home: React.FC = () => {
   return (
     <div className="flex h-screen w-full mx-auto  pad bg">
       <div className="w-[20%]"></div>
-      <div className="w-full h-full border border-white rounded-[32px] pad">
+      <div className="w-full h-full  rounded-[32px] pad flex gap-5 ">
         <Nav />
+        <div className="flex-1 flex flex-col gap-5">
+          <Post />
+          <div className="flex-1 !rounded-[8px] cam border border-[#ffffff80] mr-[58px]">
+            sad
+          </div>
+        </div>
       </div>
       <div className="w-[20%]"></div>
     </div>

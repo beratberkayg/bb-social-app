@@ -72,7 +72,7 @@ const LoginPage = () => {
                 type="email"
                 name="email"
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none a "
                 placeholder="berat@berkay.com"
                 required
               />
@@ -90,13 +90,14 @@ const LoginPage = () => {
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none a "
                 required
               />
             </div>
             <button
+              id="btn"
               type="submit"
-              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center hover:scale-95 bg-white text-black transition-all "
+              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center hover:scale-95 bg-white  transition-all "
             >
               Giriş Yap
             </button>
@@ -105,7 +106,7 @@ const LoginPage = () => {
             Henüz bir hesabın yok mu?
             <div
               onClick={changeShow}
-              className="font-medium text-primary-600 hover:underline dark:text-primary-500 inline-block cursor-pointer"
+              className="font-medium text-primary-600 hover:underline dark:text-primary-500 inline-block cursor-pointer hover:text-[#008cff]"
             >
               Aramıza Katıl!
             </div>
@@ -129,7 +130,7 @@ const LoginPage = () => {
                 type="name"
                 name="name"
                 id="name"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none a "
                 placeholder="beratberkay"
                 required
               />
@@ -146,7 +147,7 @@ const LoginPage = () => {
                 type="email"
                 name="email"
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none a "
                 placeholder="berat@berkay.com"
                 required
               />
@@ -164,13 +165,14 @@ const LoginPage = () => {
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none a"
                 required
               />
             </div>
             <button
+              id="btn"
               type="submit"
-              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center hover:scale-95 bg-white text-black transition-all "
+              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center hover:scale-95 bg-white  transition-all "
             >
               Kayıt Ol
             </button>
@@ -179,7 +181,7 @@ const LoginPage = () => {
             Hesabın var mı ?
             <div
               onClick={changeShow}
-              className="font-medium text-primary-600 hover:underline dark:text-primary-500 inline-block cursor-pointer"
+              className="font-medium text-primary-600 hover:underline dark:text-primary-500 inline-block cursor-pointer hover:text-[#008cff]"
             >
               Giriş Yap!
             </div>

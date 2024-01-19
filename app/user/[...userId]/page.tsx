@@ -14,7 +14,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import Post from "@/components/post/Post";
+import Post from "@/components/posts/Posts";
 import { PostProps } from "../../page";
 import Image from "next/image";
 import { BsTrash2Fill } from "react-icons/bs";
