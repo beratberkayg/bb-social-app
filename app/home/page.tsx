@@ -14,7 +14,7 @@ import {
 } from "firebase/firestore";
 import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import LeftBar from "@/components/leftbar/LeftBar";
+import Nav from "@/components/leftbar/Nav";
 
 export type PostProps = {
   key: string;
@@ -48,9 +48,12 @@ const Home: React.FC = () => {
   }, []);
 
   return (
-    <div className="flex w-full h-full">
-      <LeftBar />
-      <div>aa</div>
+    <div className="flex h-screen w-full mx-auto  pad bg">
+      <div className="w-[20%]"></div>
+      <div className="w-full h-full border border-white rounded-[32px] pad">
+        <Nav />
+      </div>
+      <div className="w-[20%]"></div>
     </div>
 
     // <main className="flex flex-col items-center mt-5 gap-5">

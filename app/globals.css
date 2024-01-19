@@ -3,7 +3,11 @@
 @tailwind utilities;
 
 :root {
+  --bg: hsl(0, 0%, 5%);
+  --text: hsl(0, 0%, 95%);
   --pad: max(20px, 4vmin);
+  --bg-white: hsl(0, 0%, 95%);
+  --text-white: hsl(0, 0%, 5%);
 }
 
 * {
@@ -13,8 +17,12 @@
 }
 
 body {
-  color: white;
-  background-color: black;
+  color: var(--text);
+  background-color: var(--bg);
+}
+
+.pad {
+  padding: var(--pad);
 }
 
 .bg {
@@ -22,4 +30,36 @@ body {
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+.cam {
+  background: rgba(255, 255, 255, 0);
+  border-radius: 32px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+#btn {
+  padding: 10px 20px;
+  text-transform: uppercase;
+  font-size: 25px;
+  font-weight: 500;
+  text-shadow: none;
+  background: transparent;
+  cursor: pointer;
+  box-shadow: transparent;
+  border: 1px solid #ffffff80;
+  transition: 0.5s ease;
+  user-select: none;
+}
+
+#btn:hover,
+:focus {
+  color: #ffffff;
+  background: #008cff;
+  border: 1px solid #008cff;
+  text-shadow: 0 0 5px #ffffff, 0 0 10px #ffffff, 0 0 20px #ffffff;
+  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
+    0 0 100px #008cff;
 }
