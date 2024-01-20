@@ -1,6 +1,4 @@
 "use client";
-
-import PostModal from "@/components/modals/PostModal";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -14,8 +12,7 @@ import {
   deleteDoc,
   doc,
 } from "firebase/firestore";
-import Post from "@/components/posts/Posts";
-import { PostProps } from "../../page";
+
 import Image from "next/image";
 import { BsTrash2Fill } from "react-icons/bs";
 
@@ -27,24 +24,20 @@ const User = () => {
   const [user, loading] = useAuthState(auth);
   const dispatch = useAppDispatch();
 
-  const [posts, setPosts] = useState<PostProps[]>([]);
+  // const [posts, setPosts] = useState<PostProps[]>([]);
 
-  const getData = async () => {
-    if (loading) return;
-    if (!user) return router.push("/");
+  // const getData = async () => {
+  //   if (loading) return;
+  //   if (!user) return router.push("/");
 
-    const collectionRef = collection(db, "postlar");
-    const q = query(collectionRef, where("kullaniciId", "==", user.uid));
-    const unsub = onSnapshot(q, (snap) => {
-      setPosts(
-        snap.docs?.map((doc) => ({ ...(doc.data() as PostProps), id: doc.id }))
-      );
-    });
-  };
-
-  useEffect(() => {
-    getData();
-  }, [user, loading]);
+  //   const collectionRef = collection(db, "postlar");
+  //   const q = query(collectionRef, where("kullaniciId", "==", user.uid));
+  //   const unsub = onSnapshot(q, (snap) => {
+  //     setPosts(
+  //       snap.docs?.map((doc) => ({ ...(doc.data() as PostProps), id: doc.id }))
+  //     );
+  //   });
+  // };
 
   const postSil = async (id: string) => {
     const docRef = doc(db, "postlar", id);
@@ -53,7 +46,6 @@ const User = () => {
 
   return (
     <div className="flex flex-col items-center justify-between mt-3">
-      {postModal && <PostModal />}
       <div className="w-full flex flex-col items-center gap-1 text-xl md:text-2xl border-black border-b pb-3">
         <div className="w-[100px] h-[100px] md:w-[200px] md:h-[200px] relative">
           {user?.photoURL ? (
@@ -84,17 +76,7 @@ const User = () => {
         <p className="text-2xl text-bold md:text-3xl mb-5 border-b border-black">
           Düşünceler
         </p>
-        <div className="flex items-center justify-center flex-wrap gap-3 w-full">
-          {posts.map((post) => (
-            <Post key={post.id} post={post}>
-              <div className="flex justify-end">
-                <button onClick={() => postSil(post.id)}>
-                  <BsTrash2Fill color={"red"} cursor={"pointer"} size={30} />
-                </button>
-              </div>
-            </Post>
-          ))}
-        </div>
+        <div className="flex items-center justify-center flex-wrap gap-3 w-full"></div>
       </div>
     </div>
   );
