@@ -27,14 +27,12 @@ body {
 
 .bg {
   background-image: url(".././public/bg.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+  background-size: contain;
+  background-repeat: repeat-y;
 }
 
 .cam {
   background: rgba(255, 255, 255, 0);
-  border-radius: 20px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -53,14 +51,13 @@ body {
   user-select: none;
 }
 
-#btn:hover,
-#btn:focus {
+#btn:hover {
   color: #ffffff;
   background: #008cff;
   border: 1px solid #008cff;
   text-shadow: 0 0 1px #ffffff, 0 0 1px #ffffff, 0 0 20px #ffffff;
-  box-shadow: 0 0 5px #008cff, 0 0 20px #008cff, 0 0 50px #008cff,
-    0 0 100px #008cff;
+  box-shadow: 0 0 2.5px #008cff, 0 0 10px #008cff, 0 0 25px #008cff,
+    0 0 50px #008cff;
 }
 
 .a:focus,

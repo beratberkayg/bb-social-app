@@ -72,7 +72,7 @@ const LoginPage = () => {
                 type="email"
                 name="email"
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none a "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none focus:border focus:border-[#008cff] "
                 placeholder="berat@berkay.com"
                 required
               />
@@ -90,14 +90,14 @@ const LoginPage = () => {
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none a "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none focus:border focus:border-[#008cff] "
                 required
               />
             </div>
             <button
               id="btn"
               type="submit"
-              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center hover:scale-95 bg-white  transition-all "
+              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center  bg-white  transition-all "
             >
               Giriş Yap
             </button>
@@ -130,7 +130,7 @@ const LoginPage = () => {
                 type="name"
                 name="name"
                 id="name"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none a "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none focus:border focus:border-[#008cff]  "
                 placeholder="beratberkay"
                 required
               />
@@ -147,7 +147,7 @@ const LoginPage = () => {
                 type="email"
                 name="email"
                 id="email"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none a "
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none focus:border focus:border-[#008cff]  "
                 placeholder="berat@berkay.com"
                 required
               />
@@ -165,14 +165,14 @@ const LoginPage = () => {
                 name="password"
                 id="password"
                 placeholder="••••••••"
-                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none a"
+                className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none focus:border focus:border-[#008cff] "
                 required
               />
             </div>
             <button
               id="btn"
               type="submit"
-              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center hover:scale-95 bg-white  transition-all "
+              className="w-full font-medium rounded-lg text-xl px-5 py-2 text-center  bg-white  transition-all "
             >
               Kayıt Ol
             </button>

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/redux/ReduxProvider";
-import Navbar from "@/components/header/Navbar";
+
 import Footer from "@/components/footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
@@ -21,10 +21,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${roboto.className} min-h-screen `}>
+      <body className={`${roboto.className} min-h-screen  `}>
         <ReduxProvider>
           <ToastContainer limit={1} />
-
           <main className="flex-grow">{children}</main>
         </ReduxProvider>
       </body>

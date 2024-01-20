@@ -33,10 +33,10 @@ export const register = createAsyncThunk(
       await setDoc(doc(db, "users", user.user.uid), {
         name: user.user.displayName,
         email: user.user.email,
+        id: user.user.uid,
         password: password,
         likes: [],
         posts: [],
-        friends: [],
       });
 
       dispatch(changeLoading(false));

@@ -1,24 +1,64 @@
-import React from "react";
-import { IoAdd } from "react-icons/io5";
-import { MdOutlineAddPhotoAlternate } from "react-icons/md";
+"use client";
+
+import { auth, db } from "@/utils/firebase";
+import { addDoc, collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 const Post = () => {
+  const [user, loading] = useAuthState(auth);
+  const [post, setPost] = useState<string>("");
+  const userId = user?.uid; // user?.uid ifadesi artık bir string ya da undefined olacaktır.
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (post.length < 1 || !userId) {
+      return;
+    }
+
+    try {
+      const POST = {
+        id: user.uid,
+        name: user.displayName,
+        post: post,
+      };
+
+      // Gönderiyi Firestore koleksiyonuna ekle
+      const postRef = await addDoc(collection(db, "posts"), {
+        POST,
+      });
+
+      console.log("Post added with ID: ", postRef.id);
+
+      const userDocRef = doc(db, "users", userId);
+      const userDocSnapshot = await getDoc(userDocRef);
+
+      if (userDocSnapshot.exists()) {
+        // Kullanıcı belgesini yeni gönderi kimliği ile güncelle
+        const updatedPosts = [...(userDocSnapshot.data()?.posts || []), POST];
+
+        await updateDoc(userDocRef, {
+          posts: updatedPosts,
+        });
+
+        setPost("");
+      }
+    } catch (error) {
+      console.error("Error adding post: ", error);
+    }
+  };
   return (
-    <div className="flex  gap-2">
+    <form onSubmit={handleSubmit} className="">
       <textarea
+        onChange={(e) => setPost(e.currentTarget.value)}
         name=""
         id=""
-        className="w-full h-28 outline-none border border-[#008cff]  bg-transparent !rounded-[8px] px-2 py-2 cam"
+        className="w-full h-28 outline-none border border-[#008cff]  bg-transparent !rounded-[8px] px-2 py-2 cam text-lg"
       ></textarea>
-      <div className="flex flex-col justify-between gap-3">
-        <button className="cam !rounded-full w-12 h-12 a text-4xl border-2 border-[#008cff] flex items-center justify-center">
-          <MdOutlineAddPhotoAlternate />
-        </button>
-
-        <button className="cam !rounded-full w-12 h-12 a text-4xl border-2 border-[#008cff] flex items-center justify-center">
-          <IoAdd size={50} />
-        </button>
-      </div>
-    </div>
+      <button type="submit" id="btn" className="w-full cam rounded-[8px] ">
+        Post Ekle
+      </button>
+    </form>
   );
 };
 

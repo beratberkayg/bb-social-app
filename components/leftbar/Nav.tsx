@@ -37,7 +37,6 @@ const Nav = () => {
       >
         <CiUser size={120} />
       </div>
-
       <div className="w-full flex flex-col items-center py-16  rounded-[32px] gap-12 px-3">
         {links.map((link, i) => (
           <Link
@@ -55,9 +54,9 @@ const Nav = () => {
         ))}
       </div>
       <button
-        onClick={logOutFunc}
         id="btn"
-        className="rounded-[8px] border border-[#ffffff80]"
+        onClick={logOutFunc}
+        className="rounded-[8px] border border-[#ffffff80] "
       >
         Çıkış Yap
       </button>
