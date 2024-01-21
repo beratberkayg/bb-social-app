@@ -1,6 +1,7 @@
 import React from "react";
 import Post from "../post/Post";
 import Nav from "../leftbar/Nav";
+import Background from "../bg/Background";
 
 const Home = () => {
   return (
@@ -16,6 +17,7 @@ const Home = () => {
         </div>
       </div>
       <div className="w-[20%]"></div>
+      <Background />
     </div>
   );
 };
