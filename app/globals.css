@@ -27,7 +27,7 @@ body {
 
 .bg {
   background-image: url(".././public/bg.jpg");
-  background-size: contain;
+  background-size: cover;
   background-repeat: repeat-y;
 }
 

@@ -1,5 +1,3 @@
-"use client";
-
 import Post from "@/components/post/Post";
 import { useAppSelector } from "@/redux/hooks";
 import { useEffect, useState } from "react";
@@ -13,6 +11,7 @@ import {
 import { auth, db } from "@/utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Nav from "@/components/leftbar/Nav";
+import Home from "@/components/home/Home";
 
 export type PostProps = {
   key: string;
@@ -24,9 +23,7 @@ export type PostProps = {
   id: string;
 };
 
-const Home: React.FC = () => {
-  const [user, loading] = useAuthState(auth);
-
+const HomePage: React.FC = () => {
   //   {
   //  const postlarıGetir = async () => {
   //     const collectionRef = collection(db, "postlar");
@@ -38,21 +35,7 @@ const Home: React.FC = () => {
   //     });
   //   };}
 
-  return (
-    <div className="flex min-h-screen w-full mx-auto pad bg">
-      <div className="w-[20%]"></div>
-      <div className="w-full h-full  rounded-[32px] pad flex gap-5 ">
-        <Nav />
-        <div className="flex-1 flex flex-col gap-5">
-          <Post />
-          <div className="flex-1 !rounded-[8px] cam border border-[#ffffff80] min-h-[2000px]">
-            sad
-          </div>
-        </div>
-      </div>
-      <div className="w-[20%]"></div>
-    </div>
-  );
+  return <Home />;
 };
 
-export default Home;
+export default HomePage;
