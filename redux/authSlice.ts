@@ -35,8 +35,7 @@ export const register = createAsyncThunk(
         email: user.user.email,
         id: user.user.uid,
         password: password,
-        likes: [],
-        posts: [],
+        photo: user.user.photoURL,
       });
 
       dispatch(changeLoading(false));
