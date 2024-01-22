@@ -48,14 +48,18 @@ const Post = () => {
     }
   };
   return (
-    <form onSubmit={handleSubmit} className="">
+    <form onSubmit={handleSubmit} className="flex flex-col">
       <textarea
         onChange={(e) => setPost(e.currentTarget.value)}
         name=""
         id=""
-        className="w-full h-28 outline-none border border-[#008cff]  bg-transparent !rounded-[8px] px-2 py-2 cam text-lg"
+        className="w-full h-28 outline-none border border-[#ffffff80] bg-transparent rounded-t-[8px] px-2 py-2 cam text-lg hover:border hover:border-[#008cff]"
       ></textarea>
-      <button type="submit" id="btn" className="w-full cam rounded-[8px] ">
+      <button
+        type="submit"
+        id="btn"
+        className="w-full cam !rounded-b-[8px] !border-t-0"
+      >
         Post Ekle
       </button>
     </form>

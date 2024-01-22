@@ -30,7 +30,7 @@ const Nav = () => {
   };
 
   return (
-    <div className="cam h-full w-[210px] flex flex-col items-center justify-between border border-[#ffffff80] py-7 rounded-[20px]">
+    <div className="cam h-fit w-[210px] flex flex-col items-center justify-between border border-[#ffffff80] py-7 rounded-[8px]">
       <div
         id="btn"
         className="w-36 h-36 rounded-full flex items-center justify-center border-4 border-[#008cff]  "
