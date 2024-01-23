@@ -23,7 +23,7 @@ const Home = () => {
     getPosts();
   }, [db]);
   return (
-    <div className="bg pad !bg-contain flex items-center justify-center">
+    <div className="cam pad flex items-center justify-center">
       <div className="relative top-0 left-0 w-full min-h-screen flex">
         <div className="fixed left-[300px] w-[200px] ">
           <Nav />

@@ -20,6 +20,15 @@ const Post = () => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 500,
       });
+      setPost({ post: "" });
+      return;
+    }
+    if (post.post.trim() === "") {
+      toast.error("Lütfen bir şeyler yazın...", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 500,
+      });
+      setPost({ post: "" });
       return;
     }
     if (post.post.length < 1) {
@@ -29,6 +38,7 @@ const Post = () => {
       });
       return;
     }
+
     const collectionRef = collection(db, "posts");
     await addDoc(collectionRef, {
       ...post,

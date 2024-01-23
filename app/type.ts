@@ -8,7 +8,7 @@ export interface initialStateProps {
 }
 
 export interface postType {
-  post: string | string[];
+  post: string;
 }
 
 export interface POST {
