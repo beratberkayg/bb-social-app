@@ -57,7 +57,7 @@ const Post = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col">
+    <form name="form" onSubmit={handleSubmit} className="flex flex-col w-full">
       <textarea
         value={post.post}
         onChange={(e) =>
