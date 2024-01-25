@@ -59,7 +59,12 @@ const LoginPage = () => {
       {show ? (
         <div className="flex flex-col gap-10">
           <div className="text-4xl mt-7 text-center">Giriş Yap</div>
-          <form onSubmit={handleLogin} className="flex flex-col gap-7">
+          <form
+            id="login"
+            name="form"
+            onSubmit={handleLogin}
+            className="flex flex-col gap-7"
+          >
             <div>
               <label
                 htmlFor="email"
@@ -120,7 +125,12 @@ const LoginPage = () => {
           className="flex flex-col gap-7"
         >
           <div className="text-4xl mt-2 text-center">Kayıt Ol</div>
-          <form onSubmit={handleRegister} className="flex flex-col gap-7">
+          <form
+            id="register"
+            name="form"
+            onSubmit={handleRegister}
+            className="flex flex-col gap-7"
+          >
             <div>
               <label htmlFor="name" className="block mb-2 text-xl font-medium ">
                 Kullanıcı Adı

@@ -3,7 +3,6 @@ import { Roboto_Condensed } from "next/font/google";
 import "./globals.css";
 import ReduxProvider from "@/redux/ReduxProvider";
 
-import Footer from "@/components/footer/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import Background from "@/components/bg/Background";
@@ -25,6 +24,7 @@ export default function RootLayout({
       <body className={`${roboto.className} min-h-screen black `}>
         <ReduxProvider>
           <ToastContainer limit={1} />
+          <Background />
           <div className="flex-grow">{children}</div>
         </ReduxProvider>
       </body>

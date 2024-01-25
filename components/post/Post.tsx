@@ -2,7 +2,8 @@
 
 import { postType } from "@/app/type";
 import { auth, db } from "@/utils/firebase";
-import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { randomUUID } from "crypto";
+import { addDoc, collection, doc, serverTimestamp } from "firebase/firestore";
 import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
@@ -40,6 +41,8 @@ const Post = () => {
     }
 
     const collectionRef = collection(db, "posts");
+    const newDocRef = doc(collectionRef);
+    const postId = newDocRef.id;
     await addDoc(collectionRef, {
       ...post,
       userId: user.uid,
@@ -47,6 +50,7 @@ const Post = () => {
       userMail: user.email,
       time: serverTimestamp(),
       post: post.post,
+      postId: postId,
     });
 
     toast.success("Başarıyla Eklendi", {
@@ -57,7 +61,12 @@ const Post = () => {
   };
 
   return (
-    <form name="form" onSubmit={handleSubmit} className="flex flex-col w-full">
+    <form
+      id="post"
+      name="form"
+      onSubmit={handleSubmit}
+      className="flex flex-col w-full"
+    >
       <textarea
         value={post.post}
         onChange={(e) =>
@@ -66,8 +75,8 @@ const Post = () => {
             post: e.currentTarget.value,
           })
         }
-        name=""
-        id=""
+        name="post"
+        id="text-post"
         className="w-full h-28 outline-none border border-[#ffffff80] bg-transparent rounded-t-[8px] px-2 py-2 cam text-lg hover:border hover:border-[#008cff]"
       ></textarea>
       <button

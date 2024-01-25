@@ -6,7 +6,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { logOut } from "@/redux/authSlice";
-
+import { SiAudiomack } from "react-icons/si";
 const Nav = () => {
   const [user, loading] = useAuthState(auth);
   const links = [
@@ -16,7 +16,7 @@ const Nav = () => {
     },
     {
       name: "Profil",
-      url: "/user",
+      url: `/user/${user?.uid}`,
     },
   ];
   const pathname = usePathname();
@@ -31,12 +31,13 @@ const Nav = () => {
 
   return (
     <div className="cam h-fit w-[210px] flex flex-col items-center justify-between border border-[#ffffff80] py-7 rounded-[8px]">
-      <div
+      <Link
+        href={links[1].url}
         id="btn"
         className="w-36 h-36 rounded-full flex items-center justify-center border-4 border-[#008cff]  "
       >
         <CiUser size={120} />
-      </div>
+      </Link>
       <div className="w-full flex flex-col items-center py-16  rounded-[32px] gap-12 px-3">
         {links.map((link, i) => (
           <Link
@@ -61,6 +62,22 @@ const Nav = () => {
         Çıkış Yap
       </button>
     </div>
+    // <div className="w-full h-full pad flex items-center justify-between border border-t-0 border-[#008cff] rounded-b-[8px] ">
+    //   <Link className="w-[40%]" href={"/home"}>
+    //     <SiAudiomack size={70} />
+    //   </Link>
+    //   <div className="flex-1 flex justify-between text-2xl font-light">
+    //     <Link className="hover:text-[#008cff]" href={"/home"}>
+    //       Ana Sayfa
+    //     </Link>
+    //     <Link className="hover:text-[#008cff]" href={`/user/${user?.uid}`}>
+    //       Profil
+    //     </Link>
+    //     <button className="hover:text-[#008cff]" onClick={logOutFunc}>
+    //       Çıkış Yap
+    //     </button>
+    //   </div>
+    // </div>
   );
 };
 

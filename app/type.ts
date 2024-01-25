@@ -17,4 +17,5 @@ export interface POST {
   userMail: string;
   time: Timestamp;
   post: string;
+  postId: string;
 }
