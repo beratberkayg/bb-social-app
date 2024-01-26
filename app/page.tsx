@@ -6,7 +6,7 @@ import { useAppSelector } from "@/redux/hooks";
 const Page = () => {
   const { isLoading } = useAppSelector((state) => state.auth);
   return (
-    <div className="absolute left-0 top-0 w-full h-full flex items-center justify-center bg">
+    <div className="absolute left-0 top-0 w-full h-full flex items-center justify-center ">
       <PreLoader />
       <LoginPage />
       {isLoading && <PreLoader />}

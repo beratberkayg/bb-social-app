@@ -20,7 +20,9 @@ const Home = () => {
     const ref = collection(db, "posts");
     const q = query(ref, orderBy("time", "desc"));
     const unsub = onSnapshot(q, (snap) => {
-      setPosts(snap.docs.map((doc) => ({ ...(doc.data() as POST) })));
+      setPosts(
+        snap.docs.map((doc) => ({ ...(doc.data() as POST), id: doc.id }))
+      );
     });
   };
 
@@ -28,7 +30,7 @@ const Home = () => {
 
   useEffect(() => {
     getPosts();
-  }, [db]);
+  }, []);
 
   return (
     <div className="">

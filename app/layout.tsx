@@ -24,7 +24,6 @@ export default function RootLayout({
       <body className={`${roboto.className} min-h-screen black `}>
         <ReduxProvider>
           <ToastContainer limit={1} />
-          <Background />
           <div className="flex-grow">{children}</div>
         </ReduxProvider>
       </body>

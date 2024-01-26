@@ -8,21 +8,48 @@ import { FaHeart } from "react-icons/fa";
 import { FaRegHeart } from "react-icons/fa";
 import { FaTrash } from "react-icons/fa";
 import Link from "next/link";
-import { deleteDoc, doc } from "firebase/firestore";
+import { deleteDoc, doc, updateDoc } from "firebase/firestore";
+import { toast } from "react-toastify";
+import { updateProfile } from "firebase/auth";
+import { useEffect, useState } from "react";
 const Tweet = ({ item }: { item: POST }) => {
   const [user, loading] = useAuthState(auth);
-  const deletePost = async () => {
+  const [like, setLike] = useState<POST[]>([]);
+  const deletePost = async (id: string | any) => {
     try {
-      // Construct the reference to the document you want to delete
-      const docRef = doc(db, "posts", item.postId);
+      const docRef = doc(db, "posts", id);
 
-      // Delete the document
       await deleteDoc(docRef);
-      console.log("Document successfully deleted!");
+      toast.success("Başarıyla Silindi", {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 500,
+      });
     } catch (error) {
       console.error("Error deleting document: ", error);
     }
   };
+
+  const likeFunc = (item: POST) => {
+    setLike((prevLikes) => {
+      if (prevLikes.includes(item)) {
+        const newLikes = prevLikes.filter((i) => i !== item);
+        localStorage.setItem("likes", JSON.stringify(newLikes));
+        return newLikes;
+      } else {
+        const newLikes = [...prevLikes, item];
+        localStorage.setItem("likes", JSON.stringify(newLikes));
+        return newLikes;
+      }
+    });
+  };
+
+  useEffect(() => {
+    // Sayfa her render edildiğinde localStorage'den like bilgilerini al
+    const storedLikes = localStorage.getItem("likes");
+    if (storedLikes) {
+      setLike(JSON.parse(storedLikes));
+    }
+  }, []);
 
   return (
     <div className="cam w-[99%] rounded-[8px] mx-auto min-h-[150px] flex  py-2 px-2 gap-3 border border-[#ffffff80]">
@@ -40,22 +67,18 @@ const Tweet = ({ item }: { item: POST }) => {
         </div>
         <div className=" flex-1">{item.post}</div>
         <div className=" h-[25px] flex justify-end ">
-          {user?.uid != item.userId && (
-            <div className="w-[50px] ">
+          {user && user?.uid != item.userId && (
+            <div onClick={() => likeFunc(item)} className="w-[50px] ">
               <FaRegHeart size={30} />
             </div>
           )}
-          {user?.uid === item.userId && (
-            <button
-              onClick={() => deletePost(item.postId)}
-              className="w-[50px] "
-            >
+          {user && user?.uid === item.userId && (
+            <button onClick={() => deletePost(item.id)} className="w-[50px] ">
               <FaTrash size={30} />
             </button>
           )}
         </div>
       </div>
-      {item.postId}
     </div>
   );
 };

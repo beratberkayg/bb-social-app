@@ -41,8 +41,7 @@ const Post = () => {
     }
 
     const collectionRef = collection(db, "posts");
-    const newDocRef = doc(collectionRef);
-    const postId = newDocRef.id;
+
     await addDoc(collectionRef, {
       ...post,
       userId: user.uid,
@@ -50,7 +49,6 @@ const Post = () => {
       userMail: user.email,
       time: serverTimestamp(),
       post: post.post,
-      postId: postId,
     });
 
     toast.success("Başarıyla Eklendi", {

@@ -7,8 +7,11 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppDispatch } from "@/redux/hooks";
 import { logOut } from "@/redux/authSlice";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "@/utils/firebase";
 
 const Header = () => {
+  const [user, loading] = useAuthState(auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
 
@@ -18,7 +21,7 @@ const Header = () => {
   };
   return (
     <div className="cam !rounded-b-[20px] border border-[#008cff] border-t-0 fixed top-0  w-full md:w-[50%]  text-center flex justify-between items-center px-2 lg:px-5 z-10 h-[70px]">
-      <Link href={"/user"} className="">
+      <Link href={`/user/${user?.uid}`} className="">
         <FaUser size={40} color={"#008cff"} />
       </Link>
       <Link href={"/home"}>
