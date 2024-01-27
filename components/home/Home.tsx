@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 import Nav from "../leftbar/Nav";
 import Post from "../post/Post";
-import Tweet from "../tweet/Tweet";
 
 import { auth, db } from "@/utils/firebase";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
@@ -12,11 +11,12 @@ import Header from "../header/Header";
 import { FaCode } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useAuthState } from "react-firebase-hooks/auth";
+import Tweet from "../tweet/Tweet";
 const Home = () => {
-  const [isLoading, setISLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [posts, setPosts] = useState<POST[]>([]);
   const getPosts = async () => {
-    setISLoading(true);
+    setIsLoading(true);
     const ref = collection(db, "posts");
     const q = query(ref, orderBy("time", "desc"));
     const unsub = onSnapshot(q, (snap) => {
@@ -24,6 +24,7 @@ const Home = () => {
         snap.docs.map((doc) => ({ ...(doc.data() as POST), id: doc.id }))
       );
     });
+    setIsLoading(false);
   };
 
   const [show, setShow] = useState<boolean>(false);

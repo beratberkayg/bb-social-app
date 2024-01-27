@@ -14,7 +14,7 @@ import { updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 const Tweet = ({ item }: { item: POST }) => {
   const [user, loading] = useAuthState(auth);
-  const [like, setLike] = useState<POST[]>([]);
+  const [likes, setLikes] = useState<POST[]>([]);
   const deletePost = async (id: string | any) => {
     try {
       const docRef = doc(db, "posts", id);
@@ -29,27 +29,7 @@ const Tweet = ({ item }: { item: POST }) => {
     }
   };
 
-  const likeFunc = (item: POST) => {
-    setLike((prevLikes) => {
-      if (prevLikes.includes(item)) {
-        const newLikes = prevLikes.filter((i) => i !== item);
-        localStorage.setItem("likes", JSON.stringify(newLikes));
-        return newLikes;
-      } else {
-        const newLikes = [...prevLikes, item];
-        localStorage.setItem("likes", JSON.stringify(newLikes));
-        return newLikes;
-      }
-    });
-  };
-
-  useEffect(() => {
-    // Sayfa her render edildiğinde localStorage'den like bilgilerini al
-    const storedLikes = localStorage.getItem("likes");
-    if (storedLikes) {
-      setLike(JSON.parse(storedLikes));
-    }
-  }, []);
+  console.log(likes);
 
   return (
     <div className="cam w-[99%] rounded-[8px] mx-auto min-h-[150px] flex  py-2 px-2 gap-3 border border-[#ffffff80]">
@@ -68,7 +48,10 @@ const Tweet = ({ item }: { item: POST }) => {
         <div className=" flex-1">{item.post}</div>
         <div className=" h-[25px] flex justify-end ">
           {user && user?.uid != item.userId && (
-            <div onClick={() => likeFunc(item)} className="w-[50px] ">
+            <div
+              onClick={() => setLikes([...likes, item])}
+              className="w-[50px] cursor-pointer "
+            >
               <FaRegHeart size={30} />
             </div>
           )}
@@ -82,5 +65,3 @@ const Tweet = ({ item }: { item: POST }) => {
     </div>
   );
 };
-
-export default Tweet;
