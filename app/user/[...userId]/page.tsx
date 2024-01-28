@@ -22,8 +22,16 @@ import { auth, db } from "@/utils/firebase";
 import { logOut } from "@/redux/authSlice";
 import Tweet from "@/components/tweet/Tweet";
 
-const User = ({ params }: { params: { id: string } }) => {
-  const id = params.id;
+interface userProps {
+  email: string;
+  name: string;
+  password: string;
+  id: string;
+}
+
+const User = ({ params }: { params: { userId: string } }) => {
+  const id = params.userId[0];
+  console.log(id);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -37,7 +45,7 @@ const User = ({ params }: { params: { id: string } }) => {
   };
 
   const [comments, setComments] = useState<POST[]>([]);
-
+  const [users, setUsers] = useState<userProps[]>([]);
   const [user, loading] = useAuthState(auth);
 
   const getData = async () => {
@@ -55,6 +63,19 @@ const User = ({ params }: { params: { id: string } }) => {
     });
   };
 
+  const getUser = async () => {
+    const collectionRef = collection(db, "users");
+    const q = query(collectionRef, where("id", "==", id));
+    const unsub = onSnapshot(q, (snap) => {
+      setUsers(
+        snap.docs?.map((doc) => ({
+          ...(doc.data() as userProps),
+          id: doc.id,
+        }))
+      );
+    });
+  };
+
   const deleteComment = async (id: string) => {
     const docRef = doc(db, "posts", id);
     await deleteDoc(docRef);
@@ -64,9 +85,12 @@ const User = ({ params }: { params: { id: string } }) => {
     });
   };
 
+  console.log(comments);
+
   useEffect(() => {
     getData();
-  }, [user, loading]);
+    getUser();
+  }, []);
 
   return (
     <motion.div
@@ -77,6 +101,11 @@ const User = ({ params }: { params: { id: string } }) => {
         duration: 1,
       }}
     >
+      <div>
+        {users.map((user) => (
+          <div className="text-white text-5xl z-50">{user.name}</div>
+        ))}
+      </div>
       <div className="mt-5 flex flex-col gap-3 bg-white/50 shadow-md rounded-md p-3">
         <h1 className="text-xl ">Comments</h1>
         <div className="flex gap-5 items-center justify-center flex-wrap">
