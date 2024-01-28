@@ -12,19 +12,22 @@ import { FaCode } from "react-icons/fa6";
 import { IoClose } from "react-icons/io5";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Tweet from "../tweet/Tweet";
+import TweetSkeleton from "../skeleton/TweetSkeleton";
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [posts, setPosts] = useState<POST[]>([]);
   const getPosts = async () => {
-    setIsLoading(true);
-    const ref = collection(db, "posts");
-    const q = query(ref, orderBy("time", "desc"));
-    const unsub = onSnapshot(q, (snap) => {
-      setPosts(
-        snap.docs.map((doc) => ({ ...(doc.data() as POST), id: doc.id }))
-      );
-    });
-    setIsLoading(false);
+    try {
+      setIsLoading(true);
+      const ref = collection(db, "posts");
+      const q = query(ref, orderBy("time", "desc"));
+      const unsub = onSnapshot(q, (snap) => {
+        setPosts(
+          snap.docs.map((doc) => ({ ...(doc.data() as POST), id: doc.id }))
+        );
+      });
+      setIsLoading(false);
+    } catch (error) {}
   };
 
   const [show, setShow] = useState<boolean>(false);
@@ -40,9 +43,16 @@ const Home = () => {
         <div className="flex-1 min-h-screen ">
           <Header />
           <div className="min-h-screen flex flex-col gap-5 mt-[90px]">
-            {posts.map((item, i) => (
-              <Tweet key={i} item={item} />
-            ))}
+            {posts.length === 0 ? (
+              <div className="flex flex-col gap-5">
+                <TweetSkeleton />
+                <TweetSkeleton />
+                <TweetSkeleton />
+                <TweetSkeleton />
+              </div>
+            ) : (
+              posts.map((item, i) => <Tweet key={i} item={item} />)
+            )}
             {show && (
               <div className="fixed left-0 top-0 w-full h-full flex items-center justify-center cam">
                 <Post />
@@ -121,9 +131,17 @@ const Home = () => {
         <div className="w-[40%] min-h-screen flex flex-col">
           <Post />
           <div className="mt-6 flex flex-col gap-5">
-            {posts.map((item, i) => (
-              <Tweet key={i} item={item} />
-            ))}
+            {posts.length === 0 ? (
+              <div className="flex flex-col gap-5">
+                <TweetSkeleton />
+                <TweetSkeleton />
+                <TweetSkeleton />
+                <TweetSkeleton />
+                <TweetSkeleton />
+              </div>
+            ) : (
+              posts.map((item, i) => <Tweet key={i} item={item} />)
+            )}
           </div>
         </div>
         <div className="w-[30%] min-h-screen "></div>

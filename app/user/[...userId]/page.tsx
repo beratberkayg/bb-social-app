@@ -1,84 +1,91 @@
 "use client";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { auth, db } from "@/utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+
+import { useAppDispatch } from "@/redux/hooks";
+
 import {
   collection,
+  deleteDoc,
+  doc,
   onSnapshot,
   query,
   where,
-  deleteDoc,
-  doc,
 } from "firebase/firestore";
+import { motion } from "framer-motion";
 
-import Image from "next/image";
-import { BsTrash2Fill } from "react-icons/bs";
-
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { FaUser } from "react-icons/fa";
+import { toast } from "react-toastify";
+import { POST } from "@/app/type";
+import { auth, db } from "@/utils/firebase";
+import { logOut } from "@/redux/authSlice";
+import Tweet from "@/components/tweet/Tweet";
 
-const User = () => {
-  const { postModal } = useAppSelector((state) => state.modal);
-  const router = useRouter();
-  const [user, loading] = useAuthState(auth);
+const User = ({ params }: { params: { id: string } }) => {
+  const id = params.id;
+
   const dispatch = useAppDispatch();
-
-  // const [posts, setPosts] = useState<PostProps[]>([]);
-
-  // const getData = async () => {
-  //   if (loading) return;
-  //   if (!user) return router.push("/");
-
-  //   const collectionRef = collection(db, "postlar");
-  //   const q = query(collectionRef, where("kullaniciId", "==", user.uid));
-  //   const unsub = onSnapshot(q, (snap) => {
-  //     setPosts(
-  //       snap.docs?.map((doc) => ({ ...(doc.data() as PostProps), id: doc.id }))
-  //     );
-  //   });
-  // };
-
-  const postSil = async (id: string) => {
-    const docRef = doc(db, "postlar", id);
-    await deleteDoc(docRef);
+  const router = useRouter();
+  const handleLogOut = () => {
+    dispatch(logOut());
+    toast.success("Log Out successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
+    router.push("/");
   };
 
+  const [comments, setComments] = useState<POST[]>([]);
+
+  const [user, loading] = useAuthState(auth);
+
+  const getData = async () => {
+    if (loading) return;
+
+    const collectionRef = collection(db, "posts");
+    const q = query(collectionRef, where("userId", "==", id));
+    const unsub = onSnapshot(q, (snap) => {
+      setComments(
+        snap.docs?.map((doc) => ({
+          ...(doc.data() as POST),
+          id: doc.id,
+        }))
+      );
+    });
+  };
+
+  const deleteComment = async (id: string) => {
+    const docRef = doc(db, "posts", id);
+    await deleteDoc(docRef);
+    toast.success("Comment deleted successfully", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
+  };
+
+  useEffect(() => {
+    getData();
+  }, [user, loading]);
+
   return (
-    <div className="flex flex-col items-center justify-between mt-3">
-      <div className="w-full flex flex-col items-center gap-1 text-xl md:text-2xl border-black border-b pb-3">
-        <div className="w-[100px] h-[100px] md:w-[200px] md:h-[200px] relative">
-          {user?.photoURL ? (
-            <Image
-              alt=""
-              src={user?.photoURL}
-              fill
-              style={{ borderRadius: "100%" }}
-            />
-          ) : (
-            <div className="border-black border rounded-full w-[100px] h-[100px] md:w-[200px] md:h-[200px] text-center flex items-center justify-center text-3xl md:text-[100px] ">
-              <FaUser />
-            </div>
-          )}
+    <motion.div
+      className="mt-3"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 1,
+      }}
+    >
+      <div className="mt-5 flex flex-col gap-3 bg-white/50 shadow-md rounded-md p-3">
+        <h1 className="text-xl ">Comments</h1>
+        <div className="flex gap-5 items-center justify-center flex-wrap">
+          {comments.map((item) => (
+            <Tweet key={item.id} item={item} />
+          ))}
         </div>
-        <div className="text-center">
-          <p className=" first-letter:uppercase">{user?.displayName}</p>
-          <p>{user?.email}</p>
-        </div>
-        <button
-          className="bg-orange-500 text-white py-2 px-4 rounded-lg hover:bg-black hover:text-orange-500 hover:transition-all"
-          onClick={() => auth.signOut()}
-        >
-          Çıkış Yap
-        </button>
       </div>
-      <div className="mt-10 w-full flex flex-col items-center gap-3">
-        <p className="text-2xl text-bold md:text-3xl mb-5 border-b border-black">
-          Düşünceler
-        </p>
-        <div className="flex items-center justify-center flex-wrap gap-3 w-full"></div>
-      </div>
-    </div>
+    </motion.div>
   );
 };
 
