@@ -100,7 +100,7 @@ const User = ({ params }: { params: { userId: string } }) => {
     <div className="w-full min-h-screen flex justify-center items-center">
       <Header />
 
-      <div className="w-full md:w-[60%] lg:w-[50%] min-h-screen pad flex flex-col items-center justify-center ">
+      <div className="w-full md:w-[60%] lg:w-[50%] min-h-screen pad flex flex-col items-center  ">
         <div className="w-full h-[70px]"></div>
         <div className="w-full   rounded-[8px] flex flex-col gap-5   ">
           <div className="flex flex-col items-center pad gap-3 border border-[#ffffff80] rounded-[8px] cam">
