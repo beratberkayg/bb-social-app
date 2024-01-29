@@ -21,6 +21,10 @@ import { POST } from "@/app/type";
 import { auth, db } from "@/utils/firebase";
 import { logOut } from "@/redux/authSlice";
 import Tweet from "@/components/tweet/Tweet";
+import Header from "@/components/header/Header";
+import { CiUser } from "react-icons/ci";
+import Post from "@/components/post/Post";
+import TweetSkeleton from "@/components/skeleton/TweetSkeleton";
 
 interface userProps {
   email: string;
@@ -31,7 +35,6 @@ interface userProps {
 
 const User = ({ params }: { params: { userId: string } }) => {
   const id = params.userId[0];
-  console.log(id);
 
   const dispatch = useAppDispatch();
   const router = useRouter();
@@ -44,7 +47,7 @@ const User = ({ params }: { params: { userId: string } }) => {
     router.push("/");
   };
 
-  const [comments, setComments] = useState<POST[]>([]);
+  const [posts, setPosts] = useState<POST[]>([]);
   const [users, setUsers] = useState<userProps[]>([]);
   const [user, loading] = useAuthState(auth);
 
@@ -54,7 +57,7 @@ const User = ({ params }: { params: { userId: string } }) => {
     const collectionRef = collection(db, "posts");
     const q = query(collectionRef, where("userId", "==", id));
     const unsub = onSnapshot(q, (snap) => {
-      setComments(
+      setPosts(
         snap.docs?.map((doc) => ({
           ...(doc.data() as POST),
           id: doc.id,
@@ -85,36 +88,52 @@ const User = ({ params }: { params: { userId: string } }) => {
     });
   };
 
-  console.log(comments);
-
   useEffect(() => {
     getData();
     getUser();
   }, []);
 
   return (
-    <motion.div
-      className="mt-3"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{
-        duration: 1,
-      }}
-    >
-      <div>
-        {users.map((user) => (
-          <div className="text-white text-5xl z-50">{user.name}</div>
-        ))}
-      </div>
-      <div className="mt-5 flex flex-col gap-3 bg-white/50 shadow-md rounded-md p-3">
-        <h1 className="text-xl ">Comments</h1>
-        <div className="flex gap-5 items-center justify-center flex-wrap">
-          {comments.map((item) => (
-            <Tweet key={item.id} item={item} />
-          ))}
+    <div className="w-full min-h-screen flex justify-center items-center">
+      <Header />
+      <div className="w-full md:w-[60%] lg:w-[50%] min-h-screen pad flex items-center justify-center mt-[60px] lg:mt-[50px] ">
+        <div className="w-full   rounded-[8px] flex flex-col gap-5   ">
+          <div className="flex flex-col items-center pad gap-3 border border-[#ffffff80] rounded-[8px] cam">
+            <div
+              id="btn"
+              className="w-36 h-36 rounded-full flex items-center justify-center border-4 border-[#008cff]  "
+            >
+              <CiUser size={120} />
+            </div>
+            <div>{users[0]?.name}</div>
+          </div>
+          {user?.uid === id && (
+            <div>
+              <Post />
+            </div>
+          )}
+
+          <div className="flex flex-col gap-3">
+            <div>
+              {posts.length === 0 && (
+                <div className="text-center text-2xl cam rounded-[8px]">
+                  Paylaşımlar Bekleniyor..
+                </div>
+              )}
+            </div>
+            {posts.length === 0 ? (
+              <div className="flex flex-col gap-5">
+                <TweetSkeleton />
+                <TweetSkeleton />
+                <TweetSkeleton />
+              </div>
+            ) : (
+              posts.map((item, i) => <Tweet key={i} item={item} />)
+            )}
+          </div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

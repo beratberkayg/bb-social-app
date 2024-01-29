@@ -37,8 +37,10 @@ const Tweet = ({ item }: { item: POST }) => {
       </Link>
       <div className="flex-1 min-h-[100px] flex flex-col justify-between py-1 ">
         <div className="border-b border-white h-[25px] flex items-center">
-          <div className="text-2xl">{item.userName}</div>
-          <div className="text-[12px] text-gray-300">@{item.userMail}</div>
+          <div className="text-xl">{item.userName}</div>
+          <div className="text-[12px] text-gray-300 hidden md:block">
+            @{item.userMail}
+          </div>
         </div>
         <div className=" flex-1">{item.post}</div>
         <div className=" h-[25px] flex justify-end ">
