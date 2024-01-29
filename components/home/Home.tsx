@@ -13,9 +13,15 @@ import { IoClose } from "react-icons/io5";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Tweet from "../tweet/Tweet";
 import TweetSkeleton from "../skeleton/TweetSkeleton";
+import { useRouter } from "next/navigation";
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [posts, setPosts] = useState<POST[]>([]);
+  const [user, loading] = useAuthState(auth);
+  const router = useRouter();
+  if (!user) {
+    router.push("/");
+  }
   const getPosts = async () => {
     try {
       setIsLoading(true);

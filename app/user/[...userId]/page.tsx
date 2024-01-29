@@ -10,7 +10,6 @@ import {
   query,
   where,
 } from "firebase/firestore";
-import { motion } from "framer-motion";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -31,25 +30,29 @@ interface userProps {
   name: string;
   password: string;
   id: string;
+  photo?: string;
 }
 
 const User = ({ params }: { params: { userId: string } }) => {
   const id = params.userId[0];
-
+  const [posts, setPosts] = useState<POST[]>([]);
+  const [users, setUsers] = useState<userProps[]>([]);
+  const [user, loading] = useAuthState(auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
+
+  if (!user) {
+    return router.push("/");
+  }
+
   const handleLogOut = () => {
     dispatch(logOut());
-    toast.success("Log Out successfully", {
+    toast.success("Çıkış Yapıldı", {
       position: toast.POSITION.TOP_CENTER,
       autoClose: 1000,
     });
     router.push("/");
   };
-
-  const [posts, setPosts] = useState<POST[]>([]);
-  const [users, setUsers] = useState<userProps[]>([]);
-  const [user, loading] = useAuthState(auth);
 
   const getData = async () => {
     if (loading) return;
@@ -96,7 +99,9 @@ const User = ({ params }: { params: { userId: string } }) => {
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
       <Header />
-      <div className="w-full md:w-[60%] lg:w-[50%] min-h-screen pad flex items-center justify-center mt-[60px] lg:mt-[50px] ">
+
+      <div className="w-full md:w-[60%] lg:w-[50%] min-h-screen pad flex flex-col items-center justify-center ">
+        <div className="w-full h-[70px]"></div>
         <div className="w-full   rounded-[8px] flex flex-col gap-5   ">
           <div className="flex flex-col items-center pad gap-3 border border-[#ffffff80] rounded-[8px] cam">
             <div
@@ -105,7 +110,7 @@ const User = ({ params }: { params: { userId: string } }) => {
             >
               <CiUser size={120} />
             </div>
-            <div>{users[0]?.name}</div>
+            <div className="text-3xl">{users[0]?.name}</div>
           </div>
           {user?.uid === id && (
             <div>

@@ -78,3 +78,8 @@ body {
   box-shadow: 0 0 2.5px #008cff, 0 0 10px #008cff, 0 0 25px #008cff,
     0 0 50px #008cff;
 }
+
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
