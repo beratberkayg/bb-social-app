@@ -19,3 +19,11 @@ export interface POST {
   post: string;
   id?: string | any;
 }
+
+export interface userProps {
+  email: string;
+  name: string;
+  password: string;
+  id: string;
+  photo?: string;
+}

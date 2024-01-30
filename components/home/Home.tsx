@@ -136,6 +136,7 @@ const Home = () => {
         <div className="w-[30%] min-h-screen "></div>
         <div className="w-[40%] min-h-screen flex flex-col">
           <Post />
+
           <div className="mt-6 flex flex-col gap-5">
             {posts.length === 0 ? (
               <div className="flex flex-col gap-5">

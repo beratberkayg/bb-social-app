@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./module.style.css";
 import { motion } from "framer-motion";
 
@@ -12,6 +12,7 @@ import {
 } from "@/redux/authSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
   const [show, setShow] = useState<boolean>(true);
@@ -43,10 +44,16 @@ const LoginPage = () => {
     dispatch(register({ name, email, password }));
     router.push("/home");
   };
-  const handleLogin = (e: React.FormEvent<HTMLFormElement>) => {
+
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(login({ email, password }));
+    await dispatch(login({ email, password }));
+
     router.push("/home");
+    toast.success("Giriş Yapıldı", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
   };
 
   return (
