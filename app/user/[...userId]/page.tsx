@@ -24,7 +24,9 @@ import Header from "@/components/header/Header";
 import { CiUser } from "react-icons/ci";
 import Post from "@/components/post/Post";
 import TweetSkeleton from "@/components/skeleton/TweetSkeleton";
-
+import { IoIosSettings } from "react-icons/io";
+import { IoCloseOutline } from "react-icons/io5";
+import UpdateProfil from "@/components/profile/UpdateProfil";
 interface userProps {
   email: string;
   name: string;
@@ -96,14 +98,15 @@ const User = ({ params }: { params: { userId: string } }) => {
     getUser();
   }, []);
 
+  const [show, setShow] = useState<boolean>(false);
+
   return (
     <div className="w-full min-h-screen flex justify-center items-center">
       <Header />
-
       <div className="w-full md:w-[60%] lg:w-[50%] min-h-screen pad flex flex-col items-center  ">
         <div className="w-full h-[70px]"></div>
-        <div className="w-full   rounded-[8px] flex flex-col gap-5   ">
-          <div className="flex flex-col items-center pad gap-3 border border-[#ffffff80] rounded-[8px] cam">
+        <div className="w-full rounded-[8px] flex flex-col gap-5   ">
+          <div className="flex flex-col items-center pad gap-3 border border-[#ffffff80] rounded-[8px] cam relative">
             <div
               id="btn"
               className="w-36 h-36 rounded-full flex items-center justify-center border-4 border-[#008cff]  "
@@ -111,6 +114,18 @@ const User = ({ params }: { params: { userId: string } }) => {
               <CiUser size={120} />
             </div>
             <div className="text-3xl">{users[0]?.name}</div>
+            <div>Merhaba ben {users[0]?.name}</div>
+            <div
+              onClick={() => setShow(!show)}
+              className="absolute right-2 top-2 z-20 cursor-pointer"
+            >
+              {show ? (
+                <IoCloseOutline color={"red"} size={40} />
+              ) : (
+                <IoIosSettings size={40} />
+              )}
+            </div>
+            {show && <UpdateProfil />}
           </div>
           {user?.uid === id && (
             <div>

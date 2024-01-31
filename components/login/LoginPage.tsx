@@ -74,7 +74,7 @@ const LoginPage = () => {
           >
             <div>
               <label
-                htmlFor="email"
+                htmlFor="emaill"
                 className="block mb-2 text-xl font-medium "
               >
                 Email
@@ -83,7 +83,7 @@ const LoginPage = () => {
                 onChange={handleEmailChange}
                 type="email"
                 name="email"
-                id="email"
+                id="emaill"
                 className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none focus:border focus:border-[#008cff] "
                 placeholder="berat@berkay.com"
                 required
@@ -91,7 +91,7 @@ const LoginPage = () => {
             </div>
             <div>
               <label
-                htmlFor="password"
+                htmlFor="passwordl"
                 className="block mb-2 text-xl font-medium "
               >
                 Şifre
@@ -100,7 +100,7 @@ const LoginPage = () => {
                 onChange={handlePasswordChange}
                 type="password"
                 name="password"
-                id="password"
+                id="passwordl"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none focus:border focus:border-[#008cff] "
                 required
@@ -154,7 +154,7 @@ const LoginPage = () => {
             </div>
             <div>
               <label
-                htmlFor="email"
+                htmlFor="emailr"
                 className="block mb-2 text-xl font-medium "
               >
                 Email
@@ -163,7 +163,7 @@ const LoginPage = () => {
                 onChange={handleEmailChange}
                 type="email"
                 name="email"
-                id="email"
+                id="emailr"
                 className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg block w-full p-2.5 bg-transparent outline-none focus:border focus:border-[#008cff]  "
                 placeholder="berat@berkay.com"
                 required
@@ -171,7 +171,7 @@ const LoginPage = () => {
             </div>
             <div>
               <label
-                htmlFor="password"
+                htmlFor="passwordr"
                 className="block mb-2 text-xl font-medium "
               >
                 Şifre
@@ -180,7 +180,7 @@ const LoginPage = () => {
                 onChange={handlePasswordChange}
                 type="password"
                 name="password"
-                id="password"
+                id="passwordr"
                 placeholder="••••••••"
                 className="bg-gray-50 border border-gray-300 text-white sm:text-sm rounded-lg bg-transparent  block w-full p-2.5 outline-none focus:border focus:border-[#008cff] "
                 required
