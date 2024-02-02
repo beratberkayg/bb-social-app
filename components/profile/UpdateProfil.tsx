@@ -9,7 +9,7 @@ const UpdateProfil = () => {
         id="updateForm"
         className="cam w-full h-full px-5 py-3 flex flex-col gap-5"
       >
-        <div className="flex justify-around">
+        <div className="flex justify-around flex-wrap">
           <div className="flex flex-col gap-1 w-[200px]">
             <label className="text-2xl cursor-pointer" htmlFor="uname">
               Kullanıcı Adı
@@ -34,7 +34,7 @@ const UpdateProfil = () => {
           </div>
         </div>
 
-        <button id="btn">Kaydet</button>
+        <button className="!py-0 btn">Kaydet</button>
       </form>
     </div>
   );

@@ -114,7 +114,7 @@ const User = ({ params }: { params: { userId: string } }) => {
               <CiUser size={120} />
             </div>
             <div className="text-3xl">{users[0]?.name}</div>
-            <div>Merhaba ben {users[0]?.name}</div>
+            <div>Merhaba ben {users[0]?.name}.</div>
             <div
               onClick={() => setShow(!show)}
               className="absolute right-2 top-2 z-20 cursor-pointer"
