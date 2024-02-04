@@ -14,6 +14,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import Tweet from "../tweet/Tweet";
 import TweetSkeleton from "../skeleton/TweetSkeleton";
 import { useRouter } from "next/navigation";
+
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [posts, setPosts] = useState<POST[]>([]);
@@ -33,7 +34,9 @@ const Home = () => {
         );
       });
       setIsLoading(false);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const [show, setShow] = useState<boolean>(false);
@@ -49,7 +52,7 @@ const Home = () => {
         <div className="flex-1 min-h-screen ">
           <Header />
           <div className="min-h-screen flex flex-col gap-5 mt-[90px]">
-            {posts.length === 0 ? (
+            {posts?.length === 0 ? (
               <div className="flex flex-col gap-5">
                 <TweetSkeleton />
                 <TweetSkeleton />
@@ -57,7 +60,7 @@ const Home = () => {
                 <TweetSkeleton />
               </div>
             ) : (
-              posts.map((item, i) => <Tweet key={i} item={item} />)
+              posts?.map((item, i) => <Tweet key={i} item={item} />)
             )}
             {show && (
               <div className="fixed left-0 top-0 w-full h-full flex items-center justify-center cam">

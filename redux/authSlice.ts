@@ -56,10 +56,9 @@ export const login = createAsyncThunk(
     try {
       dispatch(changeLoading(true));
 
-      const { user } = await signInWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
 
       dispatch(changeLoading(false));
-      return user;
     } catch (error) {
       console.error("Error during login:", error);
       dispatch(changeLoading(false));
