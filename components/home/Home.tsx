@@ -13,16 +13,12 @@ import { IoClose } from "react-icons/io5";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Tweet from "../tweet/Tweet";
 import TweetSkeleton from "../skeleton/TweetSkeleton";
-import { useRouter } from "next/navigation";
 
 const Home = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [posts, setPosts] = useState<POST[]>([]);
   const [user, loading] = useAuthState(auth);
-  const router = useRouter();
-  if (!user) {
-    router.push("/");
-  }
+
   const getPosts = async () => {
     try {
       setIsLoading(true);
@@ -80,58 +76,7 @@ const Home = () => {
       </div>
 
       {/* pc */}
-      {/* <div className="flex">
-        <div className="fixed  left-0 w-[30%] pad flex justify-end ">
-          <Nav />
-        </div>
-        <div className="w-[30%] min-h-screen"></div>
-        <div className="min-h-screen  w-[40%] pad">
-          {posts.map((item, i) => (
-            <Tweet key={i} item={item} />
-          ))}
-        </div>
-        <div className="w-[30%] min-h-screen"></div>
-        <div className="fixed  right-0 w-[30%] h-screen pad">
-          <Post />
-        </div>
-      </div> */}
-      {/* <div className=" pad items-center justify-center hidden lg:flex ">
-        <div className="relative top-0 left-0 w-full min-h-screen flex">
-          <div className="fixed left-[20%] w-[200px] ">
-            <Nav />
-          </div>
-          <div className="w-[500px] h-full"></div>
-          <div className="flex flex-col w-[500px] h-full  ">
-            <div className="fixed w-[500px] z-20 ">
-              <Post />
-            </div>
-            <div className="h-[185px]"></div>
-            <div className="min-h-screen  flex flex-col gap-5">
-              {posts.map((item, i) => (
-                <Tweet key={i} item={item} />
-              ))}
-            </div>
-          </div>
-        </div>
-      </div> */}
-      {/* <div className="w-full min-h-screen flex">
-        <div className="hidden lg:block lg:w-[25%] min-h-screen "></div>
-        <div className="flex-1 flex flex-col min-h-screen">
-          <div className="fixed z-50 w-[50%] h-[80px] cam ">
-            <Nav />
-          </div>
-          <div className="w-full h-[100px]"></div>
-          <div>
-            <Post />
-          </div>
-          <div className="mt-6 flex flex-col gap-5">
-            {posts.map((item, i) => (
-              <Tweet key={i} item={item} />
-            ))}
-          </div>
-        </div>
-        <div className="hidden lg:block lg:w-[25%] min-h-screen "></div>
-      </div> */}
+
       <div className="w-full min-h-screen pad hidden lg:flex ">
         <div className="fixed flex justify-end w-[28%]  ">
           <Nav />
