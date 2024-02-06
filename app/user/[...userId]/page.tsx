@@ -11,7 +11,6 @@ import {
   where,
 } from "firebase/firestore";
 
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { FaUser } from "react-icons/fa";
@@ -27,6 +26,8 @@ import TweetSkeleton from "@/components/skeleton/TweetSkeleton";
 import { IoIosSettings } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
 import UpdateProfil from "@/components/profile/UpdateProfil";
+import { useRouter } from "next/navigation";
+
 interface userProps {
   email: string;
   name: string;
@@ -43,47 +44,6 @@ const User = ({ params }: { params: { userId: string } }) => {
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  if (!user) {
-    return router.push("/");
-  }
-
-  const handleLogOut = () => {
-    dispatch(logOut());
-    toast.success("Çıkış Yapıldı", {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 1000,
-    });
-    router.push("/");
-  };
-
-  const getData = async () => {
-    if (loading) return;
-
-    const collectionRef = collection(db, "posts");
-    const q = query(collectionRef, where("userId", "==", id));
-    const unsub = onSnapshot(q, (snap) => {
-      setPosts(
-        snap.docs?.map((doc) => ({
-          ...(doc.data() as POST),
-          id: doc.id,
-        }))
-      );
-    });
-  };
-
-  const getUser = async () => {
-    const collectionRef = collection(db, "users");
-    const q = query(collectionRef, where("id", "==", id));
-    const unsub = onSnapshot(q, (snap) => {
-      setUsers(
-        snap.docs?.map((doc) => ({
-          ...(doc.data() as userProps),
-          id: doc.id,
-        }))
-      );
-    });
-  };
-
   const deleteComment = async (id: string) => {
     const docRef = doc(db, "posts", id);
     await deleteDoc(docRef);
@@ -94,10 +54,46 @@ const User = ({ params }: { params: { userId: string } }) => {
   };
 
   useEffect(() => {
+    const getData = async () => {
+      if (loading) return;
+
+      const collectionRef = collection(db, "posts");
+      const q = query(collectionRef, where("userId", "==", id));
+      const unsub = onSnapshot(q, (snap) => {
+        setPosts(
+          snap.docs?.map((doc) => ({
+            ...(doc.data() as POST),
+            id: doc.id,
+          }))
+        );
+      });
+    };
+
+    const getUser = async () => {
+      const collectionRef = collection(db, "users");
+      const q = query(collectionRef, where("id", "==", id));
+      const unsub = onSnapshot(q, (snap) => {
+        setUsers(
+          snap.docs?.map((doc) => ({
+            ...(doc.data() as userProps),
+            id: doc.id,
+          }))
+        );
+      });
+    };
     getData();
     getUser();
   }, []);
 
+  const handleLogOut = () => {
+    dispatch(logOut());
+    toast.success("Çıkış Yapıldı", {
+      position: toast.POSITION.TOP_CENTER,
+      autoClose: 1000,
+    });
+
+    router.push("/");
+  };
   const [show, setShow] = useState<boolean>(false);
 
   return (
@@ -106,15 +102,21 @@ const User = ({ params }: { params: { userId: string } }) => {
       <div className="w-full md:w-[60%] lg:w-[50%] min-h-screen pad flex flex-col items-center  ">
         <div className="w-full h-[70px]"></div>
         <div className="w-full rounded-[8px] flex flex-col gap-5   ">
-          <div className="flex flex-col items-center pad gap-3 border border-[#ffffff80] rounded-[8px] cam relative">
+          <div className="flex flex-col items-center pad gap-3 border border-[#ffffff80] rounded-[8px] cam relative ">
             <div
               id="btn"
-              className="w-36 h-36 rounded-full flex items-center justify-center border-4 border-[#008cff]  "
+              className={`w-36 h-36 rounded-full flex items-center justify-center border-4 border-[#008cff] ${
+                show ? " opacity-0 " : "opacity-100"
+              } `}
             >
               <CiUser size={120} />
             </div>
-            <div className="text-3xl">{users[0]?.name}</div>
-            <div>Merhaba ben {users[0]?.name}.</div>
+            <div className={`text-3xl ${show ? " opacity-0 " : "opacity-100"}`}>
+              {users[0]?.name}
+            </div>
+            <div className={` ${show ? " opacity-0 " : "opacity-100"}`}>
+              Merhaba ben {users[0]?.name}.
+            </div>
             <div
               onClick={() => setShow(!show)}
               className="absolute right-2 top-2 z-20 cursor-pointer"
