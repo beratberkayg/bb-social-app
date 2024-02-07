@@ -121,13 +121,17 @@ const User = ({ params }: { params: { userId: string } }) => {
               onClick={() => setShow(!show)}
               className="absolute right-2 top-2 z-20 cursor-pointer"
             >
-              {show ? (
-                <IoCloseOutline color={"red"} size={40} />
+              {user?.uid === id ? (
+                show ? (
+                  <IoCloseOutline color={"red"} size={40} />
+                ) : (
+                  <IoIosSettings size={40} />
+                )
               ) : (
-                <IoIosSettings size={40} />
+                ""
               )}
             </div>
-            {show && <UpdateProfil />}
+            {show && user?.uid === id && <UpdateProfil />}
           </div>
           {user?.uid === id && (
             <div>

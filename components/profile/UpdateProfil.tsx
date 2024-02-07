@@ -1,6 +1,17 @@
-import React from "react";
+"use client";
+import { auth, db } from "@/utils/firebase";
+import { updateCurrentUser } from "firebase/auth";
+import { collection, doc, query, updateDoc, where } from "firebase/firestore";
+import React, { useState } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const UpdateProfil = () => {
+  const [user, loading] = useAuthState(auth);
+  const [profile, setProfile] = useState<string>("");
+  const id = user?.uid;
+  // const updateProfile = async() => {
+  //   updateCurrentUser()
+  // };
   return (
     <div className="w-full h-full absolute top-0 left-0 rounded-[16px] ">
       <div className="text-center text-2xl md:text-3xl mt-3">
@@ -24,7 +35,7 @@ const UpdateProfil = () => {
             />
           </div>
           <div className="flex flex-col gap-1 w-[300px]">
-            <label className="text-xl cursor-pointer" htmlFor="uname">
+            <label className="text-xl cursor-pointer" htmlFor="uphoto">
               Profil Resmi URL
             </label>
             <input
